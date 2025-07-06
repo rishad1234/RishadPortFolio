@@ -3,7 +3,7 @@ import ContactSection from '../components/ContactSection.vue'
 </script>
 
 <template>
-  <div>
-    <ContactSection />
-  </div>
+    <div>
+        <ContactSection />
+    </div>
 </template>
