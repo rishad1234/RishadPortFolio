@@ -3,7 +3,7 @@ import PortfolioSection from '../components/PortfolioSection.vue'
 </script>
 
 <template>
-  <div>
-    <PortfolioSection />
-  </div>
+    <div>
+        <PortfolioSection />
+    </div>
 </template>

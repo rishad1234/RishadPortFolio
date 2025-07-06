@@ -5,7 +5,7 @@
         Rishad's Portfolio
       </v-toolbar-title>
     </v-app-bar>
-    
+
     <v-main>
       <RouterView />
     </v-main>
