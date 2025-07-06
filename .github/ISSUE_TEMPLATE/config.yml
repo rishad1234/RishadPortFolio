@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/yourusername/rishad-portfolio/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: 📧 Email Support
+    url: mailto:hello@rishad.dev
+    about: Contact me directly for sensitive issues or collaboration inquiries
+  - name: 🐦 Twitter
+    url: https://twitter.com/yourusername
+    about: Follow me on Twitter for updates and quick questions
