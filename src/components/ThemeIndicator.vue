@@ -19,7 +19,7 @@ const { currentTheme } = useThemeToggle()
 <style scoped>
 .theme-indicator {
   position: fixed;
-  top: 80px;
+  top: 20px; /* Reduced from 80px since no navigation bar */
   right: 20px;
   z-index: 1000;
   transition: all 0.3s ease;
@@ -27,7 +27,7 @@ const { currentTheme } = useThemeToggle()
 
 @media (max-width: 600px) {
   .theme-indicator {
-    top: 70px;
+    top: 15px; /* Reduced from 70px since no navigation bar */
     right: 10px;
   }
 }
