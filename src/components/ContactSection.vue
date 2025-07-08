@@ -1,226 +1,225 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-
-const form = ref({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-})
-
-const formValid = ref(false)
-const loading = ref(false)
-const submitted = ref(false)
-
-const nameRules = [
-    (v: string) => !!v || 'Name is required',
-    (v: string) => (v && v.length >= 2) || 'Name must be at least 2 characters'
-]
-
-const emailRules = [
-    (v: string) => !!v || 'Email is required',
-    (v: string) => /.+@.+\..+/.test(v) || 'Email must be valid'
-]
-
-const subjectRules = [
-    (v: string) => !!v || 'Subject is required'
-]
-
-const messageRules = [
-    (v: string) => !!v || 'Message is required',
-    (v: string) => (v && v.length >= 10) || 'Message must be at least 10 characters'
-]
-
-const contactInfo = ref([
-    {
-        icon: 'mdi-email',
-        title: 'Email',
-        value: 'hello@rishad.dev',
-        link: 'mailto:hello@rishad.dev'
-    },
-    {
-        icon: 'mdi-phone',
-        title: 'Phone',
-        value: '+1 (555) 123-4567',
-        link: 'tel:+15551234567'
-    },
-    {
-        icon: 'mdi-map-marker',
-        title: 'Location',
-        value: 'San Francisco, CA',
-        link: 'https://maps.google.com'
-    }
-])
-
-const socialLinks = ref([
-    {
-        icon: 'mdi-github',
-        name: 'GitHub',
-        url: 'https://github.com/yourusername',
-        color: '#333'
-    },
-    {
-        icon: 'mdi-linkedin',
-        name: 'LinkedIn',
-        url: 'https://linkedin.com/in/yourusername',
-        color: '#0077B5'
-    },
-    {
-        icon: 'mdi-twitter',
-        name: 'Twitter',
-        url: 'https://twitter.com/yourusername',
-        color: '#1DA1F2'
-    },
-    {
-        icon: 'mdi-instagram',
-        name: 'Instagram',
-        url: 'https://instagram.com/yourusername',
-        color: '#E4405F'
-    }
-])
-
-const submitForm = async () => {
-    if (!formValid.value) return
-
-    loading.value = true
-
-    try {
-        // Simulate API call
-        await new Promise(resolve => setTimeout(resolve, 2000))
-
-        // In a real application, you would send the form data to your backend
-        console.log('Form submitted:', form.value)
-
-        submitted.value = true
-
-        // Reset form
-        form.value = {
-            name: '',
-            email: '',
-            subject: '',
-            message: ''
-        }
-
-    } catch (error) {
-        console.error('Error submitting form:', error)
-    } finally {
-        loading.value = false
-    }
-}
+// Simple contact section with minimal design
 </script>
 
 <template>
-    <section id="contact" class="contact-section">
-        <v-container>
-            <v-row>
-                <v-col cols="12" class="text-center mb-8">
-                    <h2 class="display-1 font-weight-bold mb-4">Get In Touch</h2>
-                    <p class="headline text-grey-darken-1">
-                        Let's discuss your next project
-                    </p>
-                </v-col>
-            </v-row>
+  <section class="contact-section">
+    <div class="contact-container">
+      <div class="contact-content">
+        <h2 class="section-title">Contact</h2>
+        
+        <div class="contact-text">
+          <p>
+            I'm always interested in hearing about new opportunities and 
+            exciting projects. Whether you have a question or just want to 
+            say hi, feel free to reach out!
+          </p>
+        </div>
 
-            <v-row>
-                <v-col cols="12" md="6">
-                    <v-card elevation="4" class="pa-6">
-                        <v-card-title class="text-h5 font-weight-bold mb-4">
-                            Send me a message
-                        </v-card-title>
+        <div class="contact-links">
+          <div class="contact-item">
+            <span class="contact-label">Email:</span>
+            <a 
+              href="mailto:hello@rishad.dev" 
+              class="contact-link"
+            >
+              hello@rishad.dev
+            </a>
+          </div>
+          
+          <div class="contact-item">
+            <span class="contact-label">Location:</span>
+            <span class="contact-value">San Francisco, CA</span>
+          </div>
+        </div>
 
-                        <v-form v-model="formValid" @submit.prevent="submitForm">
-                            <v-row>
-                                <v-col cols="12" md="6">
-                                    <v-text-field v-model="form.name" :rules="nameRules" label="Your Name"
-                                        variant="outlined" required />
-                                </v-col>
+        <div class="social-section">
+          <h3 class="subsection-title">Connect</h3>
+          <div class="social-links">
+            <a 
+              href="https://github.com/yourusername" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <v-icon size="small">mdi-github</v-icon>
+              GitHub
+            </a>
+            <a 
+              href="https://linkedin.com/in/yourusername" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <v-icon size="small">mdi-linkedin</v-icon>
+              LinkedIn
+            </a>
+            <a 
+              href="https://twitter.com/yourusername" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <v-icon size="small">mdi-twitter</v-icon>
+              Twitter
+            </a>
+            <a 
+              href="mailto:hello@rishad.dev" 
+              class="social-link"
+            >
+              <v-icon size="small">mdi-email</v-icon>
+              Email
+            </a>
+          </div>
+        </div>
 
-                                <v-col cols="12" md="6">
-                                    <v-text-field v-model="form.email" :rules="emailRules" label="Your Email"
-                                        type="email" variant="outlined" required />
-                                </v-col>
-                            </v-row>
-
-                            <v-text-field v-model="form.subject" :rules="subjectRules" label="Subject"
-                                variant="outlined" required />
-
-                            <v-textarea v-model="form.message" :rules="messageRules" label="Your Message"
-                                variant="outlined" rows="5" required />
-
-                            <v-btn type="submit" color="primary" size="large" :loading="loading" :disabled="!formValid"
-                                block>
-                                <v-icon left>mdi-send</v-icon>
-                                Send Message
-                            </v-btn>
-                        </v-form>
-
-                        <v-alert v-if="submitted" type="success" class="mt-4" closable>
-                            Thank you for your message! I'll get back to you soon.
-                        </v-alert>
-                    </v-card>
-                </v-col>
-
-                <v-col cols="12" md="6">
-                    <div class="contact-info">
-                        <h3 class="text-h5 font-weight-bold mb-6">Contact Information</h3>
-
-                        <div class="mb-8">
-                            <p class="text-body-1 mb-4">
-                                I'm always interested in hearing about new opportunities and
-                                exciting projects. Whether you have a question or just want to
-                                say hi, feel free to reach out!
-                            </p>
-                        </div>
-
-                        <div class="contact-details">
-                            <div v-for="info in contactInfo" :key="info.title" class="contact-item mb-4">
-                                <v-btn :href="info.link" variant="text" size="large" class="justify-start pa-0"
-                                    target="_blank">
-                                    <v-icon :icon="info.icon" size="24" class="mr-3" />
-                                    <div class="text-left">
-                                        <div class="text-body-2 text-grey-darken-1">{{ info.title }}</div>
-                                        <div class="text-body-1 font-weight-medium">{{ info.value }}</div>
-                                    </div>
-                                </v-btn>
-                            </div>
-                        </div>
-
-                        <div class="social-links mt-8">
-                            <h4 class="text-h6 font-weight-bold mb-4">Follow me on</h4>
-                            <div class="d-flex flex-wrap gap-3">
-                                <v-btn v-for="social in socialLinks" :key="social.name" :href="social.url"
-                                    :icon="social.icon" :color="social.color" size="large" target="_blank"
-                                    variant="outlined" />
-                            </div>
-                        </div>
-                    </div>
-                </v-col>
-            </v-row>
-        </v-container>
-    </section>
+        <div class="footer-note">
+          <p>
+            Built with Vue.js + Vuetify • 
+            <a 
+              href="https://github.com/yourusername/portfolio" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="source-link"
+            >
+              View Source
+              <v-icon size="small">mdi-open-in-new</v-icon>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
 .contact-section {
-    padding: 80px 0;
-    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 4rem 0;
+  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+  width: 100%;
 }
 
-.contact-info {
-    padding: 20px;
+.contact-container {
+  width: 100%;
+  padding: 2rem;
+}
+
+.contact-content {
+  width: 100%;
+}
+
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: rgb(var(--v-theme-on-surface));
+}
+
+.section-title::before {
+  content: '$ ';
+  color: rgb(var(--v-theme-primary));
+  font-family: 'Courier New', monospace;
+}
+
+.contact-text {
+  margin-bottom: 3rem;
+  line-height: 1.7;
+}
+
+.contact-text p {
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.8;
+}
+
+.contact-links {
+  margin-bottom: 3rem;
 }
 
 .contact-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.contact-label {
+  min-width: 80px;
+  font-family: 'Courier New', monospace;
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.7;
+}
+
+.contact-link {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+}
+
+.contact-link:hover {
+  opacity: 0.8;
+}
+
+.contact-value {
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.8;
+}
+
+.subsection-title {
+  font-size: 1.25rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  color: rgb(var(--v-theme-on-surface));
+}
+
+.subsection-title::before {
+  content: '> ';
+  color: rgb(var(--v-theme-primary));
+  font-family: 'Courier New', monospace;
 }
 
 .social-links {
-    margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
 }
 
-.gap-3 {
-    gap: 12px;
+.social-link {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  transition: opacity 0.2s ease;
+}
+
+.social-link:hover {
+  opacity: 0.8;
+}
+
+.footer-note {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+}
+
+.footer-note p {
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.6;
+  font-size: 0.875rem;
+}
+
+.source-link {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s ease;
+}
+
+.source-link:hover {
+  opacity: 0.8;
 }
 </style>

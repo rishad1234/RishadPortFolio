@@ -1,206 +1,280 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 
 const projects = ref([
-    {
-        id: 1,
-        title: 'E-Commerce Platform',
-        description: 'A full-stack e-commerce solution built with Vue.js, Node.js, and MongoDB. Features include user authentication, product catalog, shopping cart, and payment processing.',
-        image: '/api/placeholder/400/300',
-        technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Express.js', 'Stripe API'],
-        github: 'https://github.com/yourusername/ecommerce-platform',
-        demo: 'https://demo-ecommerce.com',
-        featured: true
-    },
-    {
-        id: 2,
-        title: 'Task Management App',
-        description: 'A collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features.',
-        image: '/api/placeholder/400/300',
-        technologies: ['Vue.js', 'TypeScript', 'Firebase', 'Vuetify'],
-        github: 'https://github.com/yourusername/task-manager',
-        demo: 'https://demo-taskmanager.com',
-        featured: true
-    },
-    {
-        id: 3,
-        title: 'Weather Dashboard',
-        description: 'A responsive weather dashboard that displays current weather conditions, forecasts, and weather maps using external APIs.',
-        image: '/api/placeholder/400/300',
-        technologies: ['Vue.js', 'OpenWeather API', 'Chart.js', 'CSS3'],
-        github: 'https://github.com/yourusername/weather-dashboard',
-        demo: 'https://demo-weather.com',
-        featured: false
-    },
-    {
-        id: 4,
-        title: 'Portfolio Website',
-        description: 'A modern, responsive portfolio website built with Vue.js and Vuetify. Features smooth animations and a clean design.',
-        image: '/api/placeholder/400/300',
-        technologies: ['Vue.js', 'TypeScript', 'Vuetify', 'Vite'],
-        github: 'https://github.com/yourusername/portfolio',
-        demo: 'https://yourportfolio.com',
-        featured: false
-    },
-    {
-        id: 5,
-        title: 'Blog Platform',
-        description: 'A full-featured blog platform with markdown support, user authentication, and content management system.',
-        image: '/api/placeholder/400/300',
-        technologies: ['Vue.js', 'Nuxt.js', 'MongoDB', 'Express.js'],
-        github: 'https://github.com/yourusername/blog-platform',
-        demo: 'https://demo-blog.com',
-        featured: false
-    },
-    {
-        id: 6,
-        title: 'Chat Application',
-        description: 'Real-time chat application with multiple rooms, file sharing, and user presence indicators.',
-        image: '/api/placeholder/400/300',
-        technologies: ['Vue.js', 'Socket.io', 'Node.js', 'Redis'],
-        github: 'https://github.com/yourusername/chat-app',
-        demo: 'https://demo-chat.com',
-        featured: false
-    }
+  {
+    id: 1,
+    title: 'E-Commerce Platform',
+    description: 'Full-stack e-commerce solution with Vue.js, Node.js, and MongoDB. Features user auth, product catalog, and payment processing.',
+    technologies: ['Vue.js', 'Node.js', 'MongoDB', 'Stripe'],
+    github: 'https://github.com/yourusername/ecommerce-platform',
+    demo: 'https://demo-ecommerce.com',
+    year: '2024'
+  },
+  {
+    id: 2,
+    title: 'Task Management App',
+    description: 'Collaborative task management with real-time updates, drag-and-drop, and team features.',
+    technologies: ['Vue.js', 'TypeScript', 'Firebase', 'Vuetify'],
+    github: 'https://github.com/yourusername/task-manager',
+    demo: 'https://demo-taskmanager.com',
+    year: '2024'
+  },
+  {
+    id: 3,
+    title: 'Weather Dashboard',
+    description: 'Responsive weather dashboard with current conditions, forecasts, and interactive maps.',
+    technologies: ['Vue.js', 'OpenWeather API', 'Chart.js'],
+    github: 'https://github.com/yourusername/weather-dashboard',
+    demo: 'https://demo-weather.com',
+    year: '2023'
+  },
+  {
+    id: 4,
+    title: 'Blog Platform',
+    description: 'Full-featured blog with markdown support, user authentication, and CMS functionality.',
+    technologies: ['Nuxt.js', 'MongoDB', 'Express.js'],
+    github: 'https://github.com/yourusername/blog-platform',
+    demo: 'https://demo-blog.com',
+    year: '2023'
+  }
 ])
-
-const filter = ref('all')
-const filters = ref(['all', 'featured', 'web', 'mobile'])
-
-const filteredProjects = computed(() => {
-    if (filter.value === 'all') {
-        return projects.value
-    } else if (filter.value === 'featured') {
-        return projects.value.filter(project => project.featured)
-    }
-    return projects.value
-})
 </script>
 
 <template>
-    <section id="portfolio" class="portfolio-section">
-        <v-container>
-            <v-row>
-                <v-col cols="12" class="text-center mb-8">
-                    <h2 class="display-1 font-weight-bold mb-4">My Portfolio</h2>
-                    <p class="headline text-grey-darken-1">
-                        Check out some of my recent projects
-                    </p>
-                </v-col>
-            </v-row>
+  <section class="projects-section">
+    <div class="projects-container">
+      <div class="projects-content">
+        <h2 class="section-title">Projects</h2>
+        
+        <div class="projects-list">
+          <div 
+            v-for="project in projects" 
+            :key="project.id" 
+            class="project-item"
+          >
+            <div class="project-header">
+              <h3 class="project-title">
+                <a 
+                  :href="project.demo" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="project-link"
+                >
+                  {{ project.title }}
+                  <v-icon size="small" class="external-link-icon">mdi-open-in-new</v-icon>
+                </a>
+              </h3>
+              <span class="project-year">{{ project.year }}</span>
+            </div>
+            
+            <p class="project-description">
+              {{ project.description }}
+            </p>
+            
+            <div class="project-footer">
+              <div class="project-technologies">
+                <span 
+                  v-for="tech in project.technologies" 
+                  :key="tech" 
+                  class="tech-tag"
+                >
+                  {{ tech }}
+                </span>
+              </div>
+              
+              <div class="project-links">
+                <a 
+                  :href="project.github" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="project-action"
+                >
+                  <v-icon size="small">mdi-github</v-icon>
+                  Code
+                </a>
+                <a 
+                  :href="project.demo" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  class="project-action"
+                >
+                  <v-icon size="small">mdi-open-in-new</v-icon>
+                  Demo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
 
-            <v-row class="mb-8">
-                <v-col cols="12" class="text-center">
-                    <v-btn-toggle v-model="filter" mandatory rounded="pill" color="primary" variant="outlined">
-                        <v-btn value="all">All Projects</v-btn>
-                        <v-btn value="featured">Featured</v-btn>
-                        <v-btn value="web">Web Apps</v-btn>
-                        <v-btn value="mobile">Mobile</v-btn>
-                    </v-btn-toggle>
-                </v-col>
-            </v-row>
-
-            <v-row>
-                <v-col v-for="project in filteredProjects" :key="project.id" cols="12" md="6" lg="4">
-                    <v-card class="project-card" elevation="4" :class="{ 'featured-project': project.featured }">
-                        <v-img :src="project.image" :alt="project.title" height="200" cover>
-                            <div class="project-overlay">
-                                <v-btn icon="mdi-github" size="large" color="white" :href="project.github"
-                                    target="_blank" class="ma-2" />
-                                <v-btn icon="mdi-open-in-new" size="large" color="white" :href="project.demo"
-                                    target="_blank" class="ma-2" />
-                            </div>
-                        </v-img>
-
-                        <v-card-title class="text-h6 font-weight-bold">
-                            {{ project.title }}
-                            <v-chip v-if="project.featured" color="primary" size="small" class="ml-2">
-                                Featured
-                            </v-chip>
-                        </v-card-title>
-
-                        <v-card-text>
-                            <p class="text-body-2 mb-3">{{ project.description }}</p>
-
-                            <div class="tech-chips">
-                                <v-chip v-for="tech in project.technologies" :key="tech" size="small" variant="outlined"
-                                    class="ma-1">
-                                    {{ tech }}
-                                </v-chip>
-                            </div>
-                        </v-card-text>
-
-                        <v-card-actions>
-                            <v-btn color="primary" variant="text" :href="project.demo" target="_blank">
-                                <v-icon left>mdi-open-in-new</v-icon>
-                                Live Demo
-                            </v-btn>
-
-                            <v-btn color="secondary" variant="text" :href="project.github" target="_blank">
-                                <v-icon left>mdi-github</v-icon>
-                                Code
-                            </v-btn>
-                        </v-card-actions>
-                    </v-card>
-                </v-col>
-            </v-row>
-
-            <v-row class="mt-8">
-                <v-col cols="12" class="text-center">
-                    <p class="text-body-1 mb-4">
-                        Want to see more of my work?
-                    </p>
-                    <v-btn color="primary" size="large" href="https://github.com/yourusername" target="_blank">
-                        <v-icon left>mdi-github</v-icon>
-                        View All Projects on GitHub
-                    </v-btn>
-                </v-col>
-            </v-row>
-        </v-container>
-    </section>
+        <div class="more-projects">
+          <p class="more-text">
+            View more projects on my 
+            <a 
+              href="https://github.com/yourusername" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="github-link"
+            >
+              GitHub
+              <v-icon size="small">mdi-open-in-new</v-icon>
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 </template>
 
 <style scoped>
-.portfolio-section {
-    padding: 80px 0;
-    background-color: #ffffff;
+.projects-section {
+  padding: 4rem 0;
+  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+  width: 100%;
 }
 
-.project-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    height: 100%;
+.projects-container {
+  width: 100%;
+  padding: 2rem;
 }
 
-.project-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+.projects-content {
+  width: 100%;
 }
 
-.featured-project {
-    border: 2px solid #1976D2;
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-bottom: 2rem;
+  color: rgb(var(--v-theme-on-surface));
 }
 
-.project-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
+.section-title::before {
+  content: '$ ';
+  color: rgb(var(--v-theme-primary));
+  font-family: 'Courier New', monospace;
 }
 
-.project-card:hover .project-overlay {
-    opacity: 1;
+.projects-list {
+  margin-bottom: 3rem;
 }
 
-.tech-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 4px;
+.project-item {
+  padding: 1.5rem 0;
+  border-bottom: 1px solid rgba(var(--v-border-color), 0.1);
+}
+
+.project-item:last-child {
+  border-bottom: none;
+}
+
+.project-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.project-title {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+}
+
+.project-link {
+  color: rgb(var(--v-theme-on-surface));
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.project-link:hover {
+  color: rgb(var(--v-theme-primary));
+}
+
+.external-link-icon {
+  opacity: 0.6;
+}
+
+.project-year {
+  font-size: 0.875rem;
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.6;
+  font-family: 'Courier New', monospace;
+}
+
+.project-description {
+  margin: 0.5rem 0 1rem 0;
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.8;
+  line-height: 1.6;
+}
+
+.project-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.project-technologies {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.tech-tag {
+  padding: 0.25rem 0.5rem;
+  background-color: rgba(var(--v-theme-on-surface), 0.1);
+  color: rgb(var(--v-theme-on-surface));
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-family: 'Courier New', monospace;
+}
+
+.project-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.project-action {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: none;
+  font-size: 0.875rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s ease;
+}
+
+.project-action:hover {
+  opacity: 0.8;
+}
+
+.more-projects {
+  text-align: center;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+}
+
+.more-text {
+  color: rgb(var(--v-theme-on-surface));
+  opacity: 0.8;
+}
+
+.github-link {
+  color: rgb(var(--v-theme-primary));
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  transition: opacity 0.2s ease;
+}
+
+.github-link:hover {
+  opacity: 0.8;
 }
 </style>

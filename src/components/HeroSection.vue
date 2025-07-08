@@ -1,33 +1,29 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
-import { useRouter } from 'vue-router'
 
-const router = useRouter()
-const text = ref('')
-const fullText = "I'm a Full Stack Developer"
-const typewriterSpeed = 100
+const currentTime = ref('')
+const location = 'Dhaka, Bangladesh'
 
-onMounted(() => {
-    let index = 0
-    const typeWriter = () => {
-        if (index < fullText.length) {
-            text.value += fullText.charAt(index)
-            index++
-            setTimeout(typeWriter, typewriterSpeed)
-        }
-    }
-    typeWriter()
-})
-
-const scrollToPortfolio = () => {
-    const element = document.getElementById('portfolio')
-    if (element) {
-        element.scrollIntoView({ behavior: 'smooth' })
-    }
+const updateTime = () => {
+    const now = new Date()
+    const timeString = now.toLocaleTimeString('en-US', { 
+        hour12: false,
+        hour: '2-digit',
+        minute: '2-digit'
+    })
+    const dayString = now.toLocaleDateString('en-US', { 
+        weekday: 'short'
+    })
+    currentTime.value = `${dayString} ${timeString}`
 }
 
-const scrollToContact = () => {
-    const element = document.getElementById('contact')
+onMounted(() => {
+    updateTime()
+    setInterval(updateTime, 1000)
+})
+
+const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId)
     if (element) {
         element.scrollIntoView({ behavior: 'smooth' })
     }
@@ -36,70 +32,121 @@ const scrollToContact = () => {
 
 <template>
     <section id="home" class="hero-section">
-        <v-container fluid class="fill-height">
-            <v-row align="center" justify="center" class="fill-height">
-                <v-col cols="12" md="8" class="text-center">
-                    <v-avatar size="200" class="mb-8">
-                        <v-img src="/api/placeholder/200/200" alt="Rishad's Profile" class="rounded-circle" />
-                    </v-avatar>
+        <div class="hero-container">
+            <!-- Header with time and location -->
+            <div class="header-info mb-8">
+                <h3 class="text-h6 font-weight-light text-grey">
+                    {{ currentTime }}, {{ location }}
+                </h3>
+            </div>
 
-                    <h1 class="display-2 font-weight-bold mb-4">
-                        Hi, I'm <span class="text-primary">Rishad</span>
-                    </h1>
+            <!-- Main hero content -->
+            <div class="hero-content">
+                <h4 class="text-h6 font-weight-light text-grey mb-2">
+                    Hi! My Name is
+                </h4>
+                
+                <h1 class="hero-title text-h2 text-md-h1 font-weight-bold mb-6">
+                    Rishad Khan
+                </h1>
 
-                    <div class="display-1 mb-6" style="min-height: 60px;">
-                        <span class="typewriter">{{ text }}</span>
-                        <span class="cursor">|</span>
-                    </div>
+                <p class="hero-description text-h6 text-md-h5 font-weight-light mb-8 text-grey-lighten-1">
+                    Meet Rishad, a driven full-stack developer with a passion for tackling 
+                    challenging projects. With 5+ years of valuable experience under their belt, 
+                    they thrive on pushing boundaries and solving complex problems.
+                </p>
 
-                    <p class="headline mb-8">
-                        Passionate about creating amazing web experiences with modern technologies.
-                        I specialize in Vue.js, TypeScript, and building scalable applications.
-                    </p>
-
-                    <v-btn color="primary" size="large" class="mr-4" @click="scrollToContact">
-                        Get In Touch
+                <!-- Social Links -->
+                <div class="social-links">
+                    <v-btn 
+                        variant="text" 
+                        class="social-link pa-0 justify-start"
+                        href="https://github.com/yourusername"
+                        target="_blank"
+                    >
+                        Follow me on Github!
+                    </v-btn>
+                    
+                    <v-btn 
+                        variant="text" 
+                        class="social-link pa-0 justify-start"
+                        href="https://linkedin.com/in/yourusername"
+                        target="_blank"
+                    >
+                        Connect with me on LinkedIn!
+                    </v-btn>
+                    
+                    <v-btn 
+                        variant="text" 
+                        class="social-link pa-0 justify-start"
+                        href="mailto:your.email@example.com"
+                    >
+                        Email me
                     </v-btn>
 
-                    <v-btn variant="outlined" size="large" @click="scrollToPortfolio">
-                        View My Work
+                    <v-btn 
+                        variant="text" 
+                        class="social-link pa-0 justify-start"
+                        @click="scrollToSection('experience')"
+                    >
+                        View my work experience
                     </v-btn>
-                </v-col>
-            </v-row>
-        </v-container>
+                </div>
+            </div>
+        </div>
     </section>
 </template>
 
 <style scoped>
 .hero-section {
     min-height: 100vh;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+    background-color: transparent;
+    color: inherit;
+    display: flex;
+    align-items: flex-start;
+    padding-top: 20px;
+    width: 100%;
 }
 
-.typewriter {
-    font-family: 'Courier New', monospace;
+.hero-container {
+    width: 100%;
+    padding: 2rem;
 }
 
-.cursor {
-    animation: blink 1s infinite;
+.hero-title {
+    line-height: 1.2;
+    letter-spacing: -0.02em;
 }
 
-@keyframes blink {
-
-    0%,
-    50% {
-        opacity: 1;
-    }
-
-    51%,
-    100% {
-        opacity: 0;
-    }
+.hero-description {
+    line-height: 1.6;
 }
 
-.v-avatar {
-    border: 4px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 0 30px rgba(255, 255, 255, 0.3);
+.social-links {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.social-link {
+    font-size: 1.1rem !important;
+    font-weight: 400 !important;
+    text-transform: none !important;
+    color: inherit !important;
+    min-height: auto !important;
+    padding: 4px 0 !important;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+.social-link:hover {
+    color: rgb(var(--v-theme-primary)) !important;
+    text-decoration: underline;
+}
+
+.header-info {
+    border-bottom: 1px solid rgba(var(--v-border-color), 0.2);
+    padding-bottom: 16px;
 }
 </style>
