@@ -129,8 +129,11 @@ const projects = ref([
 <style scoped>
 .projects-section {
   padding: 4rem 0;
-  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+  border-top: 1px solid rgb(var(--v-theme-outline));
   width: 100%;
+  background-color: rgb(var(--v-theme-background));
+  color: rgb(var(--v-theme-on-background));
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .projects-container {
@@ -146,7 +149,8 @@ const projects = ref([
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 2rem;
-  color: rgb(var(--v-theme-on-surface));
+  color: rgb(var(--v-theme-on-background));
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section-title::before {

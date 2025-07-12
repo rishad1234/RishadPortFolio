@@ -100,12 +100,13 @@ const scrollToSection = (sectionId: string) => {
 <style scoped>
 .hero-section {
     min-height: 100vh;
-    background-color: transparent;
-    color: inherit;
+    background-color: rgb(var(--v-theme-background));
+    color: rgb(var(--v-theme-on-background));
     display: flex;
     align-items: flex-start;
     padding-top: 20px;
     width: 100%;
+    transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-container {
@@ -116,10 +117,14 @@ const scrollToSection = (sectionId: string) => {
 .hero-title {
     line-height: 1.2;
     letter-spacing: -0.02em;
+    color: rgb(var(--v-theme-on-background));
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .hero-description {
     line-height: 1.6;
+    color: rgb(var(--v-theme-secondary));
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-links {
@@ -133,20 +138,37 @@ const scrollToSection = (sectionId: string) => {
     font-size: 1.1rem !important;
     font-weight: 400 !important;
     text-transform: none !important;
-    color: inherit !important;
+    color: rgb(var(--v-theme-on-background)) !important;
     min-height: auto !important;
     padding: 4px 0 !important;
     text-decoration: underline;
     text-underline-offset: 2px;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
 }
 
 .social-link:hover {
     color: rgb(var(--v-theme-primary)) !important;
     text-decoration: underline;
+    text-decoration-color: rgb(var(--v-theme-primary));
 }
 
 .header-info {
-    border-bottom: 1px solid rgba(var(--v-border-color), 0.2);
+    border-bottom: 1px solid rgb(var(--v-theme-outline));
     padding-bottom: 16px;
+    transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.header-info h3 {
+    color: rgb(var(--v-theme-secondary)) !important;
+    transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Text color overrides for proper theme support */
+.text-grey {
+    color: rgb(var(--v-theme-secondary)) !important;
+}
+
+.text-grey-lighten-1 {
+    color: rgb(var(--v-theme-secondary-lighten-1)) !important;
 }
 </style>

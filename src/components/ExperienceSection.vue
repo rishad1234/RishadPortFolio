@@ -98,35 +98,6 @@ const experiences = ref([
           </div>
         </div>
       </div>
-
-      <!-- Additional Links -->
-      <div class="additional-links mt-16">
-        <h3 class="text-h5 font-weight-medium mb-4">Additional Links</h3>
-        <div class="links-list">
-          <v-btn 
-            variant="text" 
-            class="link-btn pa-0 justify-start mb-2"
-            href="/"
-          >
-            Home
-          </v-btn>
-          <v-btn 
-            variant="text" 
-            class="link-btn pa-0 justify-start mb-2"
-            href="/projects"
-          >
-            Projects
-          </v-btn>
-          <v-btn 
-            variant="text" 
-            class="link-btn pa-0 justify-start mb-2"
-            href="/resume.pdf"
-            target="_blank"
-          >
-            Resume
-          </v-btn>
-        </div>
-      </div>
     </div>
   </section>
 </template>
@@ -134,8 +105,10 @@ const experiences = ref([
 <style scoped>
 .experience-section {
   padding: 80px 0;
-  background-color: transparent;
+  background-color: rgb(var(--v-theme-background));
+  color: rgb(var(--v-theme-on-background));
   width: 100%;
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .experience-container {
@@ -198,24 +171,15 @@ const experiences = ref([
 
 .tech-chip:hover {
   background-color: rgba(var(--v-theme-primary), 0.1) !important;
+  border-color: rgb(var(--v-theme-primary)) !important;
 }
 
-.additional-links {
-  border-top: 1px solid rgba(var(--v-border-color), 0.2);
-  padding-top: 32px;
+/* Text color overrides for proper theme support */
+.text-grey {
+  color: rgb(var(--v-theme-secondary)) !important;
 }
 
-.link-btn {
-  font-size: 1.1rem !important;
-  font-weight: 400 !important;
-  text-transform: none !important;
-  color: inherit !important;
-  min-height: auto !important;
-  text-decoration: underline;
-  text-underline-offset: 2px;
-}
-
-.link-btn:hover {
-  color: rgb(var(--v-theme-primary)) !important;
+.text-grey-lighten-1 {
+  color: rgb(var(--v-theme-secondary-lighten-1)) !important;
 }
 </style>

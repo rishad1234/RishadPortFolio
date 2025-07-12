@@ -47,8 +47,11 @@
 <style scoped>
 .about-section {
   padding: 4rem 0;
-  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+  border-top: 1px solid rgb(var(--v-theme-outline));
   width: 100%;
+  background-color: rgb(var(--v-theme-background));
+  color: rgb(var(--v-theme-on-background));
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .about-container {
@@ -61,22 +64,23 @@
 }
 
 .about-content {
-  max-width: 800px;
-  margin: 0 auto;
+  max-width: 1000px;
 }
 
 .section-title {
   font-size: 1.5rem;
   font-weight: 500;
   margin-bottom: 2rem;
-  color: rgb(var(--v-theme-on-surface));
+  color: rgb(var(--v-theme-on-background));
   position: relative;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .section-title::before {
   content: '$ ';
   color: rgb(var(--v-theme-primary));
   font-family: 'Courier New', monospace;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .about-text {
@@ -86,21 +90,23 @@
 
 .about-text p {
   margin-bottom: 1.5rem;
-  color: rgb(var(--v-theme-on-surface));
-  opacity: 0.8;
+  color: rgb(var(--v-theme-secondary));
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .subsection-title {
   font-size: 1.25rem;
   font-weight: 500;
   margin-bottom: 1rem;
-  color: rgb(var(--v-theme-on-surface));
+  color: rgb(var(--v-theme-on-background));
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .subsection-title::before {
   content: '> ';
   color: rgb(var(--v-theme-primary));
   font-family: 'Courier New', monospace;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .skills-list {
@@ -117,5 +123,11 @@
   font-size: 0.875rem;
   font-family: 'Courier New', monospace;
   border: 1px solid rgba(var(--v-theme-primary), 0.2);
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.skill-tag:hover {
+  background-color: rgba(var(--v-theme-primary), 0.2);
+  border-color: rgba(var(--v-theme-primary), 0.4);
 }
 </style>
