@@ -138,8 +138,7 @@ onUnmounted(() => {
 /* Responsive design */
 @media (max-width: 768px) {
   .main-navigation {
-    right: 50%;
-    transform: translateX(50%);
+    right: 80px;
     padding: 6px 12px;
   }
   
@@ -153,12 +152,17 @@ onUnmounted(() => {
 }
 
 @media (max-width: 480px) {
+  .main-navigation {
+    right: 80px;
+    padding: 4px 8px;
+  }
+  
   .nav-links {
-    gap: 12px;
+    gap: 10px;
   }
   
   .nav-link {
-    font-size: 0.75rem;
+    font-size: 0.7rem;
   }
 }
 </style>
