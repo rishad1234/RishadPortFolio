@@ -1,6 +1,7 @@
 <template>
   <v-app>
     <v-main>
+      <MainNavigation />
       <RouterView />
       <ThemeToggle />
     </v-main>
@@ -10,6 +11,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import ThemeToggle from '@/components/ThemeToggle.vue'
+import MainNavigation from '@/components/MainNavigation.vue'
 </script>
 
 <style>

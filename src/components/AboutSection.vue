@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <section class="about-section">
+  <section id="about" class="about-section">
     <div class="about-container">
       <div class="about-content">
         <h2 class="section-title">About</h2>

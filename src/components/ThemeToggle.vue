@@ -32,6 +32,8 @@ const { currentTheme, toggleTheme } = useThemeToggle()
   border-radius: 50%;
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  width: 40px;
+  height: 40px;
 }
 
 .theme-toggle-btn:hover {

@@ -42,7 +42,7 @@ const projects = ref([
 </script>
 
 <template>
-  <section class="projects-section">
+  <section id="projects" class="projects-section">
     <div class="projects-container">
       <div class="projects-content">
         <h2 class="section-title">Projects</h2>
