@@ -53,6 +53,29 @@ Make sure you have the following installed:
 | `npm run preview` | 👀 Preview production build locally |
 | `npm run lint` | 🔍 Lint code with ESLint |
 | `npm run type-check` | ✅ Type-check with TypeScript |
+| `npm run deploy` | 🚀 Deploy to GitHub Pages (manual) |
+
+---
+
+## 🌐 Live Demo
+
+**Portfolio is live at:** [https://mdrishadulislamkhan.github.io/RishadPortFolio/](https://mdrishadulislamkhan.github.io/RishadPortFolio/)
+
+### 🚀 Deployment
+
+This project is automatically deployed to GitHub Pages using GitHub Actions.
+
+**Automatic Deployment:**
+- Push to `main` branch triggers deployment
+- Built with GitHub Actions
+- Deployed to GitHub Pages
+
+**Manual Deployment:**
+```bash
+npm run deploy
+```
+
+For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ---
 
