@@ -4,38 +4,61 @@ import { ref } from 'vue'
 const experiences = ref([
   {
     id: 1,
-    title: 'Senior Full Stack Developer',
-    company: 'TechCorp Inc.',
-    period: 'Jan 2023 - Present',
-    technologies: ['Vue.js', 'TypeScript', 'Node.js', 'MongoDB', 'AWS'],
+    title: 'Software Development Engineer II',
+    company: 'Craftsmen',
+    period: 'Jan 2024 - Present',
+    technologies: ['Vue.js', 'TypeScript', 'Node.js', 'DynamoDB', 'AWS', 'Serverless Framework', 'CloudFront', 'CodeBuild', 'CodePipeline', 'Cognito', 'Vuetify', 'IAM', 'S3', 'Lambda', 'API Gateway', 'Multi-region Architecture', 'CI/CD', 'Data Migration'],
     achievements: [
-      'Led the development of a scalable microservices architecture, improving system performance by 40%',
-      'Mentored junior developers and established coding standards that reduced bugs by 60%',
-      'Implemented CI/CD pipelines using Docker and AWS, reducing deployment time by 75%'
+      'Implemented multi-region active-active architecture using AWS, enabling resilient and highly available unified login system across API, UI, and DB layers',
+      'Automated Lambda@Edge versioning and IAM role updates via DB-configured stages with automated ACM certificate provisioning for CloudFront distributions',
+      'Overhauled bookmark system with data migration, Lexorank-based folder reordering, and new UI for improved user experience',
+      'Migrated core components from Vue 2 to Vue 3 to enhance maintainability and compatibility with modern tooling',
+      'Trained 20+ engineers at Craftsmen Excellence Academy on Serverless architecture, covering AWS Lambda, API Gateway, DynamoDB, and CI/CD best practices',
+      'Improved media processing with custom player supporting SRT/VTT subtitles, swimlane UI for metadata visualization, and searchable asset deletion interface',
+      'Strengthened system reliability with region-to-region data replication for disaster recovery and retry logic for uploads in poor network conditions'
     ]
   },
   {
     id: 2,
-    title: 'Full Stack Developer',
-    company: 'Digital Solutions Ltd.',
-    period: 'March 2021 - Dec 2022',
-    technologies: ['React', 'Node.js', 'PostgreSQL', 'Docker'],
+    title: 'Software Development Engineer I',
+    company: 'Craftsmen',
+    period: 'Dec 2021 - Jan 2024',
+    technologies: ['Vue.js', 'TypeScript', 'Node.js', 'DynamoDB', 'AWS', 'Serverless Framework', 'CloudFront', 'CodeBuild', 'CodePipeline', 'S3', 'Lambda', 'API Gateway', 'Step Functions', 'SNS'],
     achievements: [
-      'Built and deployed 15+ responsive web applications serving 10,000+ users',
-      'Optimized database queries and API endpoints, achieving 50% faster response times',
-      'Collaborated with cross-functional teams to deliver projects 20% ahead of schedule'
+      'Architected core components of cloud-based media asset management (MAM) platform supporting multi-tenant workflows across hybrid storage environments',
+      'Leveraged AWS services (S3, Lambda, API Gateway, CloudFront, DynamoDB) to build scalable and performant media and metadata operations',
+      'Designed DynamoDB data architecture ensuring efficient access patterns, tenant isolation, and seamless scalability',
+      'Engineered resilient upload system using S3 multipart uploads with automatic retry and resume logic, reducing interruptions during large file transfers',
+      'Designed flexible metadata modeling framework to dynamically attach structured metadata to media assets with real-time UI management',
+      'Orchestrated asset transfer workflows using AWS Step Functions, coordinating Lambda, S3, and SNS for secure media file movement between cloud and on-premise environments',
+      'Implemented CI/CD pipelines with AWS CodePipeline, CodeBuild, and GitHub Actions, reducing deployment time by 40%'
     ]
   },
   {
     id: 3,
-    title: 'Frontend Developer',
-    company: 'StartupVenture',
-    period: 'June 2019 - Feb 2021',
-    technologies: ['Vue.js', 'JavaScript', 'CSS3', 'Firebase'],
+    title: 'Back End Developer',
+    company: 'Symbl',
+    period: 'Jan 2020 - Jul 2020',
+    technologies: ['Express.js', 'Nuxt.js', 'Prismic', 'Node.js', 'JavaScript', 'REST APIs', 'Agile'],
     achievements: [
-      'Developed user-facing features for a SaaS platform with 95% user satisfaction',
-      'Implemented responsive designs that increased mobile engagement by 35%',
-      'Reduced page load times by 60% through code optimization and lazy loading'
+      'Specialized in building scalable websites by seamlessly integrating backend systems, focusing on Express.js for server-side development',
+      'Collaborated closely with the Nuxt.js frontend framework and utilized Prismic, a headless CMS, to deliver dynamic content',
+      'Crafted robust APIs, managed databases, and implemented server-side logic to ensure optimal performance',
+      'Operated within an agile framework, actively participating in sprint planning and contributing to continuous integration processes'
+    ]
+  },
+  {
+    id: 4,
+    title: 'Back End Developer',
+    company: 'Moodron',
+    period: 'Jul 2019 - Dec 2019',
+    technologies: ['Laravel', 'Vue.js', 'PHP', 'JavaScript', 'MySQL', 'Full-stack Development'],
+    achievements: [
+      'Generated innovative ideas to improve product features and backend functionality during internship at Moodron',
+      'Enhanced and optimized existing website components, collaborating closely with the Vue.js frontend team to improve user experience',
+      'Spearheaded the development of a comprehensive invoice management system using the Laravel framework',
+      'Built robust backend systems ensuring seamless functionality and optimal performance',
+      'Gained valuable full-stack development experience by working with both Laravel (backend) and Vue.js (frontend) technologies'
     ]
   }
 ])

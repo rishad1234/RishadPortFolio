@@ -47,13 +47,18 @@ const scrollToSection = (sectionId: string) => {
                 </h4>
                 
                 <h1 class="hero-title text-h2 text-md-h1 font-weight-bold mb-6">
-                    Rishad Khan
+                    Rishadul Islam Khan
                 </h1>
 
                 <p class="hero-description text-h6 text-md-h5 font-weight-light mb-8 text-grey-lighten-1">
-                    Meet Rishad, a driven full-stack developer with a passion for tackling 
-                    challenging projects. With 5+ years of valuable experience under their belt, 
-                    they thrive on pushing boundaries and solving complex problems.
+                    Welcome! I specialize in crafting exceptional digital experiences through 
+                    full-stack development and innovative problem-solving.
+                    <br><br>
+                    With years of experience building modern web applications, I bring a unique 
+                    blend of technical expertise and creative vision to every project. My passion 
+                    lies in transforming complex challenges into elegant, scalable solutions.
+                    <br><br>
+                    Let's build something extraordinary together.
                 </p>
 
                 <!-- Social Links -->
@@ -61,7 +66,7 @@ const scrollToSection = (sectionId: string) => {
                     <v-btn 
                         variant="text" 
                         class="social-link pa-0 justify-start"
-                        href="https://github.com/yourusername"
+                        href="https://github.com/rishad1234"
                         target="_blank"
                     >
                         Follow me on Github!
@@ -70,7 +75,7 @@ const scrollToSection = (sectionId: string) => {
                     <v-btn 
                         variant="text" 
                         class="social-link pa-0 justify-start"
-                        href="https://linkedin.com/in/yourusername"
+                        href="https://www.linkedin.com/in/rishadul-islam-khan-47931a14b"
                         target="_blank"
                     >
                         Connect with me on LinkedIn!
@@ -79,7 +84,7 @@ const scrollToSection = (sectionId: string) => {
                     <v-btn 
                         variant="text" 
                         class="social-link pa-0 justify-start"
-                        href="mailto:your.email@example.com"
+                        href="mailto:rishadulislam@outlook.com"
                     >
                         Email me
                     </v-btn>

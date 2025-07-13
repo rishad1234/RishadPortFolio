@@ -1,5 +1,5 @@
 <script setup lang="ts">
-// Simple contact section with minimal design
+// Contact section with real information and social links
 </script>
 
 <template>
@@ -10,9 +10,10 @@
         
         <div class="contact-text">
           <p>
-            I'm always interested in hearing about new opportunities and 
-            exciting projects. Whether you have a question or just want to 
-            say hi, feel free to reach out!
+            I'm always interested in discussing new opportunities, challenging projects, 
+            and innovative solutions in cloud architecture and full-stack development. 
+            Whether you have a question about AWS serverless systems, want to collaborate 
+            on a project, or just want to connect, feel free to reach out!
           </p>
         </div>
 
@@ -20,16 +21,21 @@
           <div class="contact-item">
             <span class="contact-label">Email:</span>
             <a 
-              href="mailto:hello@rishad.dev" 
+              href="mailto:rishadulislam@outlook.com" 
               class="contact-link"
             >
-              hello@rishad.dev
+              rishadulislam@outlook.com
             </a>
           </div>
           
           <div class="contact-item">
             <span class="contact-label">Location:</span>
-            <span class="contact-value">San Francisco, CA</span>
+            <span class="contact-value">Dhaka, Bangladesh</span>
+          </div>
+
+          <div class="contact-item">
+            <span class="contact-label">Company:</span>
+            <span class="contact-value">Craftsmen (Software Development Engineer II)</span>
           </div>
         </div>
 
@@ -37,7 +43,7 @@
           <h3 class="subsection-title">Connect</h3>
           <div class="social-links">
             <a 
-              href="https://github.com/yourusername" 
+              href="https://github.com/rishad1234" 
               target="_blank" 
               rel="noopener noreferrer"
               class="social-link"
@@ -46,7 +52,7 @@
               GitHub
             </a>
             <a 
-              href="https://linkedin.com/in/yourusername" 
+              href="https://www.linkedin.com/in/rishadul-islam-khan-47931a14b" 
               target="_blank" 
               rel="noopener noreferrer"
               class="social-link"
@@ -55,7 +61,7 @@
               LinkedIn
             </a>
             <a 
-              href="https://twitter.com/yourusername" 
+              href="https://x.com/RishadulIslam6" 
               target="_blank" 
               rel="noopener noreferrer"
               class="social-link"
@@ -64,7 +70,16 @@
               Twitter
             </a>
             <a 
-              href="mailto:hello@rishad.dev" 
+              href="https://www.facebook.com/rishadulislamkhan/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="social-link"
+            >
+              <v-icon size="small">mdi-facebook</v-icon>
+              Facebook
+            </a>
+            <a 
+              href="mailto:rishadulislam@outlook.com" 
               class="social-link"
             >
               <v-icon size="small">mdi-email</v-icon>
@@ -73,11 +88,23 @@
           </div>
         </div>
 
+        <div class="expertise-highlight">
+          <h3 class="subsection-title">Open to Opportunities</h3>
+          <div class="opportunity-tags">
+            <span class="opportunity-tag">AWS Cloud Architecture</span>
+            <span class="opportunity-tag">Serverless Development</span>
+            <span class="opportunity-tag">Vue.js & TypeScript</span>
+            <span class="opportunity-tag">Full-stack Development</span>
+            <span class="opportunity-tag">Team Leadership</span>
+            <span class="opportunity-tag">Technical Mentoring</span>
+          </div>
+        </div>
+
         <div class="footer-note">
           <p>
-            Built with Vue.js + Vuetify • 
+            Built with Vue.js + Vuetify + TypeScript • 
             <a 
-              href="https://github.com/yourusername/portfolio" 
+              href="https://github.com/rishad1234/RishadPortFolio" 
               target="_blank" 
               rel="noopener noreferrer"
               class="source-link"
@@ -94,12 +121,11 @@
 
 <style scoped>
 .contact-section {
-  padding: 4rem 0;
-  border-top: 1px solid rgb(var(--v-theme-outline));
+  padding: 80px 0;
   width: 100%;
   background-color: rgb(var(--v-theme-background));
   color: rgb(var(--v-theme-on-background));
-  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: background-color 0.3s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-container {
@@ -112,16 +138,13 @@
 }
 
 .section-title {
-  font-size: 1.5rem;
-  font-weight: 500;
-  margin-bottom: 2rem;
-  color: rgb(var(--v-theme-on-surface));
-}
-
-.section-title::before {
-  content: '$ ';
-  color: rgb(var(--v-theme-primary));
-  font-family: 'Courier New', monospace;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: bold;
+  margin-bottom: 3rem;
+  color: rgb(var(--v-theme-on-background));
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-text {
@@ -130,8 +153,9 @@
 }
 
 .contact-text p {
-  color: rgb(var(--v-theme-on-surface));
-  opacity: 0.8;
+  color: rgb(var(--v-theme-secondary));
+  font-size: 1.1rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-links {
@@ -141,21 +165,22 @@
 .contact-item {
   display: flex;
   align-items: center;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   gap: 1rem;
 }
 
 .contact-label {
-  min-width: 80px;
-  font-family: 'Courier New', monospace;
-  color: rgb(var(--v-theme-on-surface));
-  opacity: 0.7;
+  min-width: 100px;
+  font-weight: 500;
+  color: rgb(var(--v-theme-on-background));
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .contact-link {
   color: rgb(var(--v-theme-primary));
   text-decoration: none;
   transition: opacity 0.2s ease;
+  font-size: 1rem;
 }
 
 .contact-link:hover {
@@ -163,28 +188,28 @@
 }
 
 .contact-value {
-  color: rgb(var(--v-theme-on-surface));
-  opacity: 0.8;
+  color: rgb(var(--v-theme-secondary));
+  font-size: 1rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.social-section {
+  margin-bottom: 3rem;
 }
 
 .subsection-title {
-  font-size: 1.25rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  color: rgb(var(--v-theme-on-surface));
-}
-
-.subsection-title::before {
-  content: '> ';
-  color: rgb(var(--v-theme-primary));
-  font-family: 'Courier New', monospace;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: rgb(var(--v-theme-on-background));
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .social-links {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  margin-bottom: 3rem;
+  margin-bottom: 2rem;
 }
 
 .social-link {
@@ -193,24 +218,53 @@
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  font-size: 0.9rem;
-  transition: opacity 0.2s ease;
+  font-size: 1rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(var(--v-theme-primary), 0.3);
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
 .social-link:hover {
-  opacity: 0.8;
+  background-color: rgba(var(--v-theme-primary), 0.1);
+  border-color: rgb(var(--v-theme-primary));
+}
+
+.expertise-highlight {
+  margin-bottom: 3rem;
+}
+
+.opportunity-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.opportunity-tag {
+  padding: 0.5rem 1rem;
+  background-color: rgba(var(--v-theme-primary), 0.1);
+  color: rgb(var(--v-theme-primary));
+  border-radius: 6px;
+  font-size: 0.875rem;
+  border: 1px solid rgba(var(--v-theme-primary), 0.2);
+  transition: all 0.2s ease;
+}
+
+.opportunity-tag:hover {
+  background-color: rgba(var(--v-theme-primary), 0.2);
+  border-color: rgba(var(--v-theme-primary), 0.4);
 }
 
 .footer-note {
   text-align: center;
   padding-top: 2rem;
-  border-top: 1px solid rgba(var(--v-border-color), 0.1);
+  border-top: 1px solid rgba(var(--v-border-color), 0.2);
 }
 
 .footer-note p {
-  color: rgb(var(--v-theme-on-surface));
-  opacity: 0.6;
-  font-size: 0.875rem;
+  color: rgb(var(--v-theme-secondary));
+  font-size: 0.9rem;
+  transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .source-link {
@@ -224,5 +278,41 @@
 
 .source-link:hover {
   opacity: 0.8;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .contact-container {
+    padding: 1rem;
+  }
+  
+  .contact-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .contact-label {
+    min-width: auto;
+    font-weight: 600;
+  }
+  
+  .social-links {
+    gap: 1rem;
+  }
+  
+  .social-link {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .opportunity-tags {
+    gap: 0.5rem;
+  }
+  
+  .opportunity-tag {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
 }
 </style>
