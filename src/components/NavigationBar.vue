@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ref } from 'vue'
 import { useThemeToggle } from '@/composables/useThemeToggle'
 
 const { currentTheme, toggleTheme } = useThemeToggle()

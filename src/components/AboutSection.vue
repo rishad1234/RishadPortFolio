@@ -10,7 +10,7 @@
         
         <div class="about-text">
           <p>
-            I'm a Senior Software Development Engineer with over 5 years of experience 
+            I'm a Senior Software Development Engineer with years of experience 
             specializing in cloud-native applications, serverless architecture, and modern 
             web development. Currently at Craftsmen, I architect and build scalable systems 
             using AWS services, focusing on multi-region deployments and high-availability solutions.
