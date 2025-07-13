@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <!-- Primary vibrant gradient -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#45b7d1;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#f9ca24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0932b;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 3D depth gradient -->
+    <linearGradient id="depthGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3748;stop-opacity:0.9" />
+      <stop offset="50%" style="stop-color:#4a5568;stop-opacity:0.7" />
+      <stop offset="100%" style="stop-color:#718096;stop-opacity:0.5" />
+    </linearGradient>
+    
+    <!-- Side panel gradient -->
+    <linearGradient id="sideGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a202c;stop-opacity:0.8" />
+      <stop offset="100%" style="stop-color:#4a5568;stop-opacity:0.4" />
+    </linearGradient>
+    
+    <!-- Artistic background -->
+    <radialGradient id="bgGradient" cx="30%" cy="30%" r="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ff6b9d;stop-opacity:0.04" />
+    </radialGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1" flood-color="#1a202c" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Artistic background -->
+  <circle cx="16" cy="16" r="15" fill="url(#bgGradient)" opacity="0.8"/>
+  
+  <!-- Deep 3D shadow layers -->
+  <path d="M11 9 L11 25 L13 25 L13 18 L17 18 L21 25 L23 25 L19 17 Q22 16 22 13 Q22 9 17 9 Z M13 11 L17 11 Q20 11 20 13 Q20 16 17 16 L13 16 Z" 
+        fill="url(#depthGradient)" 
+        transform="translate(1.5,1.5)"/>
+  
+  <path d="M10 8 L10 24 L12 24 L12 17 L16 17 L20 24 L22 24 L18 16 Q21 15 21 12 Q21 8 16 8 Z M12 10 L16 10 Q19 10 19 12 Q19 15 16 15 L12 15 Z" 
+        fill="url(#sideGradient)" 
+        transform="translate(0.8,0.8)"/>
+  
+  <!-- Main letter R -->
+  <path d="M9 7 L9 23 L11 23 L11 16 L15 16 L19 23 L21 23 L17 15 Q20 14 20 11 Q20 7 15 7 Z M11 9 L15 9 Q18 9 18 11 Q18 14 15 14 L11 14 Z" 
+        fill="url(#primaryGradient)" 
+        filter="url(#shadow)"/>
+  
+  <!-- Highlights -->
+  <path d="M9 7 L9 8 L11 8 L11 9 L15 9 Q17 9 17 10 L18 10 Q18 7 15 7 Z" 
+        fill="rgba(255,255,255,0.6)"/>
+  
+  <path d="M9 7 L9 23 L10 23 L10 7 Z" 
+        fill="rgba(255,255,255,0.4)"/>
+  
+  <!-- Sparkles -->
+  <circle cx="13" cy="12" r="0.3" fill="rgba(255,255,255,0.8)"/>
+  <circle cx="17" cy="10" r="0.2" fill="rgba(255,255,255,0.6)"/>
+</svg>

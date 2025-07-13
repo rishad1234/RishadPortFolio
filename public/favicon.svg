@@ -1,0 +1,99 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <defs>
+    <!-- Primary vibrant gradient -->
+    <linearGradient id="primaryGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#ff6b6b;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#4ecdc4;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#45b7d1;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#f9ca24;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f0932b;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- 3D depth gradient with perspective -->
+    <linearGradient id="depthGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#2d3748;stop-opacity:0.9" />
+      <stop offset="40%" style="stop-color:#4a5568;stop-opacity:0.7" />
+      <stop offset="80%" style="stop-color:#718096;stop-opacity:0.5" />
+      <stop offset="100%" style="stop-color:#a0aec0;stop-opacity:0.3" />
+    </linearGradient>
+    
+    <!-- Side panel gradient for 3D effect -->
+    <linearGradient id="sideGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#1a202c;stop-opacity:0.8" />
+      <stop offset="50%" style="stop-color:#2d3748;stop-opacity:0.6" />
+      <stop offset="100%" style="stop-color:#4a5568;stop-opacity:0.4" />
+    </linearGradient>
+    
+    <!-- Artistic background -->
+    <radialGradient id="bgGradient" cx="30%" cy="30%" r="100%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:0.1" />
+      <stop offset="30%" style="stop-color:#764ba2;stop-opacity:0.08" />
+      <stop offset="70%" style="stop-color:#f093fb;stop-opacity:0.06" />
+      <stop offset="100%" style="stop-color:#ff6b9d;stop-opacity:0.04" />
+    </radialGradient>
+    
+    <!-- Enhanced glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge> 
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    
+    <!-- Multiple shadow layers -->
+    <filter id="multiShadow" x="-100%" y="-100%" width="300%" height="300%">
+      <feDropShadow dx="3" dy="6" stdDeviation="3" flood-color="#1a202c" flood-opacity="0.4"/>
+      <feDropShadow dx="1" dy="2" stdDeviation="1" flood-color="#2d3748" flood-opacity="0.3"/>
+    </filter>
+    
+    <!-- Bevel effect -->
+    <filter id="bevel" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur in="SourceAlpha" stdDeviation="2"/>
+      <feSpecularLighting result="specOut" in="blur" specularConstant="1.5" specularExponent="20" lighting-color="#white">
+        <fePointLight x="-5000" y="-10000" z="20000"/>
+      </feSpecularLighting>
+      <feComposite in="specOut" in2="SourceAlpha" operator="in" result="specOut"/>
+      <feComposite in="SourceGraphic" in2="specOut" operator="arithmetic" k1="0" k2="1" k3="1" k4="0"/>
+    </filter>
+  </defs>
+  
+  <!-- Artistic background with subtle pattern -->
+  <circle cx="50" cy="50" r="48" fill="url(#bgGradient)" opacity="0.8"/>
+  <circle cx="50" cy="50" r="46" fill="none" stroke="url(#primaryGradient)" stroke-width="0.5" opacity="0.3"/>
+  
+  <!-- Deep 3D shadow layers -->
+  <path d="M34 29 L34 79 L39 79 L39 56 L54 56 L67 79 L73 79 L59 54 Q69 52 69 42 Q69 29 54 29 Z M39 34 L54 34 Q64 34 64 42 Q64 51 54 51 L39 51 Z" 
+        fill="url(#depthGradient)" 
+        transform="translate(4,4) skewX(-2)"/>
+  
+  <path d="M32 27 L32 77 L37 77 L37 54 L52 54 L65 77 L71 77 L57 52 Q67 50 67 40 Q67 27 52 27 Z M37 32 L52 32 Q62 32 62 40 Q62 49 52 49 L37 49 Z" 
+        fill="url(#sideGradient)" 
+        transform="translate(2,2) skewX(-1)"/>
+  
+  <!-- Main letter R with enhanced 3D effect -->
+  <path d="M30 25 L30 75 L35 75 L35 52 L50 52 L63 75 L69 75 L55 50 Q65 48 65 38 Q65 25 50 25 Z M35 30 L50 30 Q60 30 60 38 Q60 47 50 47 L35 47 Z" 
+        fill="url(#primaryGradient)" 
+        filter="url(#multiShadow)"/>
+  
+  <!-- Top bevel highlights -->
+  <path d="M30 25 L30 27 L35 27 L35 30 L50 30 Q58 30 58 32 L60 32 Q60 25 50 25 Z" 
+        fill="rgba(255,255,255,0.6)"/>
+  
+  <!-- Left edge highlight -->
+  <path d="M30 25 L30 75 L32 75 L32 25 Z" 
+        fill="rgba(255,255,255,0.4)"/>
+  
+  <!-- Rounded corner highlight on P -->
+  <path d="M50 30 Q58 30 58 35 Q58 40 55 42 Q60 40 60 38 Q60 30 50 30 Z" 
+        fill="rgba(255,255,255,0.3)"/>
+  
+  <!-- Artistic glow accents -->
+  <ellipse cx="40" cy="35" rx="6" ry="3" fill="rgba(255,255,255,0.25)" transform="rotate(-20 40 35)"/>
+  <ellipse cx="55" cy="60" rx="4" ry="2" fill="rgba(255,255,255,0.2)" transform="rotate(15 55 60)"/>
+  
+  <!-- Subtle sparkle effects -->
+  <circle cx="42" cy="40" r="1" fill="rgba(255,255,255,0.8)"/>
+  <circle cx="58" cy="35" r="0.8" fill="rgba(255,255,255,0.6)"/>
+  <circle cx="45" cy="65" r="0.6" fill="rgba(255,255,255,0.5)"/>
+</svg>
