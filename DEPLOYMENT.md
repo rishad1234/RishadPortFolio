@@ -97,7 +97,7 @@ To use a custom domain:
    ```
    Type: CNAME
    Name: www (or @)
-   Value: mdrishadulislamkhan.github.io
+   Value: rishad1234.github.io
    ```
 
 3. Update the `base` configuration in `vite.config.ts`:
@@ -113,4 +113,4 @@ To use a custom domain:
 
 ---
 
-**Your portfolio will be live at:** https://mdrishadulislamkhan.github.io/RishadPortFolio/
+**Your portfolio will be live at:** https://rishad1234.github.io/RishadPortFolio/
