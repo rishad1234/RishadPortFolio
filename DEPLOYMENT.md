@@ -9,6 +9,7 @@ The repository is configured with GitHub Actions for automatic deployment.
 ### Setup Steps:
 
 1. **Push to GitHub**
+
    ```bash
    git add .
    git commit -m "feat: add GitHub Pages deployment"
@@ -37,12 +38,15 @@ npm run deploy
 ## 📝 Configuration Details
 
 ### Vite Configuration
+
 The project is configured with the correct base path for GitHub Pages:
+
 ```typescript
 base: process.env.NODE_ENV === 'production' ? '/RishadPortFolio/' : '/'
 ```
 
 ### GitHub Actions Workflow
+
 - **File**: `.github/workflows/deploy.yml`
 - **Triggers**: Push to `main` branch
 - **Node Version**: 18.x
@@ -89,18 +93,21 @@ npm run preview
 To use a custom domain:
 
 1. Add a `CNAME` file to the `public` folder:
-   ```
+
+   ```bash
    yourdomain.com
    ```
 
 2. Configure DNS records with your domain provider:
-   ```
+
+   ```bash
    Type: CNAME
    Name: www (or @)
    Value: rishad1234.github.io
    ```
 
 3. Update the `base` configuration in `vite.config.ts`:
+
    ```typescript
    base: process.env.NODE_ENV === 'production' ? '/' : '/'
    ```
@@ -113,4 +120,4 @@ To use a custom domain:
 
 ---
 
-**Your portfolio will be live at:** https://rishad1234.github.io/RishadPortFolio/
+**Your portfolio will be live at:** <https://rishad1234.github.io/RishadPortFolio/>

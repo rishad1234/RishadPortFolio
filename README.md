@@ -18,29 +18,34 @@
 ### Prerequisites
 
 Make sure you have the following installed:
+
 - **Node.js** (v18.0.0 or higher)
 - **npm** (v8.0.0 or higher)
 
 ### Installation
 
 1. **Clone the repository**
+
    ```bash
    git clone https://github.com/mdrishadulislamkhan/RishadPortFolio.git
    cd RishadPortFolio
    ```
 
 2. **Install dependencies**
+
    ```bash
    npm install
    ```
 
 3. **Start development server**
+
    ```bash
    npm run dev
    ```
 
 4. **Open in browser**
-   ```
+
+   ```bash
    http://localhost:5173
    ```
 
@@ -59,18 +64,20 @@ Make sure you have the following installed:
 
 ## 🌐 Live Demo
 
-**Portfolio is live at:** [https://mdrishadulislamkhan.github.io/RishadPortFolio/](https://mdrishadulislamkhan.github.io/RishadPortFolio/)
+**Portfolio is live at:** [https://rishad1234.github.io/RishadPortFolio/](https://rishad1234.github.io/RishadPortFolio/)
 
 ### 🚀 Deployment
 
 This project is automatically deployed to GitHub Pages using GitHub Actions.
 
 **Automatic Deployment:**
+
 - Push to `main` branch triggers deployment
 - Built with GitHub Actions
 - Deployed to GitHub Pages
 
 **Manual Deployment:**
+
 ```bash
 npm run deploy
 ```
@@ -81,7 +88,7 @@ For detailed deployment instructions, see [DEPLOYMENT.md](DEPLOYMENT.md)
 
 ## 📁 Project Structure
 
-```
+```bash
 src/
 ├── components/
 │   ├── HeroSection.vue          # Professional introduction
