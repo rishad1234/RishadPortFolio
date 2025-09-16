@@ -1,67 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue';
+import { experienceService, type ExperienceData } from '@/services/experienceService';
 
-const experiences = ref([
-  {
-    id: 1,
-    title: 'Software Development Engineer II',
-    company: 'Craftsmen',
-    period: 'Jan 2024 - Present',
-    technologies: ['Vue.js', 'TypeScript', 'Node.js', 'DynamoDB', 'AWS', 'Serverless Framework', 'CloudFront', 'CodeBuild', 'CodePipeline', 'Cognito', 'Vuetify', 'IAM', 'S3', 'Lambda', 'API Gateway', 'Multi-region Architecture', 'CI/CD', 'Data Migration'],
-    achievements: [
-      'Implemented multi-region active-active architecture using AWS, enabling resilient and highly available unified login system across API, UI, and DB layers',
-      'Automated Lambda@Edge versioning and IAM role updates via DB-configured stages with automated ACM certificate provisioning for CloudFront distributions',
-      'Overhauled bookmark system with data migration, Lexorank-based folder reordering, and new UI for improved user experience',
-      'Migrated core components from Vue 2 to Vue 3 to enhance maintainability and compatibility with modern tooling',
-      'Trained 20+ engineers at Craftsmen Excellence Academy on Serverless architecture, covering AWS Lambda, API Gateway, DynamoDB, and CI/CD best practices',
-      'Improved media processing with custom player supporting SRT/VTT subtitles, swimlane UI for metadata visualization, and searchable asset deletion interface',
-      'Strengthened system reliability with region-to-region data replication for disaster recovery and retry logic for uploads in poor network conditions'
-    ]
-  },
-  {
-    id: 2,
-    title: 'Software Development Engineer I',
-    company: 'Craftsmen',
-    period: 'Dec 2021 - Jan 2024',
-    technologies: ['Vue.js', 'TypeScript', 'Node.js', 'DynamoDB', 'AWS', 'Serverless Framework', 'CloudFront', 'CodeBuild', 'CodePipeline', 'S3', 'Lambda', 'API Gateway', 'Step Functions', 'SNS'],
-    achievements: [
-      'Architected core components of cloud-based media asset management (MAM) platform supporting multi-tenant workflows across hybrid storage environments',
-      'Leveraged AWS services (S3, Lambda, API Gateway, CloudFront, DynamoDB) to build scalable and performant media and metadata operations',
-      'Designed DynamoDB data architecture ensuring efficient access patterns, tenant isolation, and seamless scalability',
-      'Engineered resilient upload system using S3 multipart uploads with automatic retry and resume logic, reducing interruptions during large file transfers',
-      'Designed flexible metadata modeling framework to dynamically attach structured metadata to media assets with real-time UI management',
-      'Orchestrated asset transfer workflows using AWS Step Functions, coordinating Lambda, S3, and SNS for secure media file movement between cloud and on-premise environments',
-      'Implemented CI/CD pipelines with AWS CodePipeline, CodeBuild, and GitHub Actions, reducing deployment time by 40%'
-    ]
-  },
-  {
-    id: 3,
-    title: 'Back End Developer',
-    company: 'Symbl',
-    period: 'Jan 2020 - Jul 2020',
-    technologies: ['Express.js', 'Nuxt.js', 'Prismic', 'Node.js', 'JavaScript', 'REST APIs', 'Agile'],
-    achievements: [
-      'Specialized in building scalable websites by seamlessly integrating backend systems, focusing on Express.js for server-side development',
-      'Collaborated closely with the Nuxt.js frontend framework and utilized Prismic, a headless CMS, to deliver dynamic content',
-      'Crafted robust APIs, managed databases, and implemented server-side logic to ensure optimal performance',
-      'Operated within an agile framework, actively participating in sprint planning and contributing to continuous integration processes'
-    ]
-  },
-  {
-    id: 4,
-    title: 'Back End Developer',
-    company: 'Moodron',
-    period: 'Jul 2019 - Dec 2019',
-    technologies: ['Laravel', 'Vue.js', 'PHP', 'JavaScript', 'MySQL', 'Full-stack Development'],
-    achievements: [
-      'Generated innovative ideas to improve product features and backend functionality during internship at Moodron',
-      'Enhanced and optimized existing website components, collaborating closely with the Vue.js frontend team to improve user experience',
-      'Spearheaded the development of a comprehensive invoice management system using the Laravel framework',
-      'Built robust backend systems ensuring seamless functionality and optimal performance',
-      'Gained valuable full-stack development experience by working with both Laravel (backend) and Vue.js (frontend) technologies'
-    ]
+// Reactive data
+const experienceData = ref<ExperienceData | null>(null);
+const loading = ref(true);
+const error = ref<string | null>(null);
+
+// Load experience data on component mount
+onMounted(async () => {
+  try {
+    experienceData.value = await experienceService.getExperienceData();
+  } catch (err) {
+    error.value = 'Failed to load experience information';
+    console.error('Error loading experience data:', err);
+  } finally {
+    loading.value = false;
   }
-])
+});
 </script>
 
 <template>
@@ -72,55 +28,84 @@ const experiences = ref([
         Experience
       </h2>
 
-      <!-- Experience Items -->
-      <div class="experience-list">
-        <div 
-          v-for="(exp, index) in experiences" 
-          :key="exp.id"
-          class="experience-item"
-          :class="{ 'mb-12': index < experiences.length - 1 }"
-        >
-          <!-- Job Title and Company -->
-          <div class="job-header mb-4">
-            <h3 class="text-h5 text-md-h4 font-weight-medium">
-              {{ exp.title }}
-            </h3>
-            <h4 class="text-h6 text-md-h5 font-weight-light text-grey mb-2">
-              {{ exp.company }}
-            </h4>
-            <p class="text-body-1 text-grey font-weight-light">
-              {{ exp.period }}
-            </p>
-          </div>
+      <!-- Loading state -->
+      <div v-if="loading" class="loading-state">
+        <p>Loading...</p>
+      </div>
+      
+      <!-- Error state -->
+      <div v-else-if="error" class="error-state">
+        <p>{{ error }}</p>
+      </div>
 
-          <!-- Achievements -->
-          <div class="achievements mb-4">
-            <div 
-              v-for="achievement in exp.achievements" 
-              :key="achievement"
-              class="achievement-item mb-2"
-            >
-              <span class="achievement-arrow text-primary">❯</span>
-              <p class="achievement-text text-body-1 text-md-h6">
-                {{ achievement }}
+      <!-- Content when data is loaded -->
+      <template v-else-if="experienceData">
+        <!-- Optional description -->
+        <div v-if="experienceData.description && experienceData.description.length > 0" class="experience-description mb-8">
+          <p v-for="(paragraph, index) in experienceData.description" :key="index" class="text-body-1 text-grey mb-4">
+            {{ paragraph }}
+          </p>
+        </div>
+
+        <!-- Experience Items -->
+        <div class="experience-list">
+          <div 
+            v-for="(exp, index) in experienceData.experiences" 
+            :key="exp.id"
+            class="experience-item"
+            :class="{ 'mb-12': index < experienceData.experiences.length - 1 }"
+          >
+            <!-- Job Title and Company -->
+            <div class="job-header mb-4">
+              <h3 class="text-h5 text-md-h4 font-weight-medium">
+                {{ exp.title }}
+              </h3>
+              <h4 class="text-h6 text-md-h5 font-weight-light text-grey mb-2">
+                {{ exp.company }}
+                <v-chip 
+                  v-if="exp.type === 'current'" 
+                  size="x-small" 
+                  color="primary" 
+                  variant="outlined"
+                  class="ml-2"
+                >
+                  Current
+                </v-chip>
+              </h4>
+              <p class="text-body-1 text-grey font-weight-light">
+                {{ exp.period }}
               </p>
             </div>
-          </div>
 
-          <!-- Technologies -->
-          <div class="technologies">
-            <v-chip
-              v-for="tech in exp.technologies"
-              :key="tech"
-              variant="outlined"
-              size="small"
-              class="tech-chip ma-1"
-            >
-              {{ tech }}
-            </v-chip>
+            <!-- Achievements -->
+            <div class="achievements mb-4">
+              <div 
+                v-for="achievement in exp.achievements" 
+                :key="achievement"
+                class="achievement-item mb-2"
+              >
+                <span class="achievement-arrow text-primary">❯</span>
+                <p class="achievement-text text-body-1 text-md-h6">
+                  {{ achievement }}
+                </p>
+              </div>
+            </div>
+
+            <!-- Technologies -->
+            <div class="technologies">
+              <v-chip
+                v-for="tech in exp.technologies"
+                :key="tech"
+                variant="outlined"
+                size="small"
+                class="tech-chip ma-1"
+              >
+                {{ tech }}
+              </v-chip>
+            </div>
           </div>
         </div>
-      </div>
+      </template>
     </div>
   </section>
 </template>
@@ -142,6 +127,21 @@ const experiences = ref([
 .section-title {
   line-height: 1.2;
   letter-spacing: -0.02em;
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: rgb(var(--v-theme-secondary));
+}
+
+.error-state {
+  color: rgb(var(--v-theme-error));
+}
+
+.experience-description {
+  margin-bottom: 2rem;
 }
 
 .experience-item {
