@@ -1,0 +1,33 @@
+{
+  "description": [
+    "I'm a Senior Software Development Engineer with years of experience specializing in cloud-native applications, serverless architecture, and modern web development. Currently at Craftsmen, I architect and build scalable systems using AWS services, focusing on multi-region deployments and high-availability solutions.",
+    "My expertise spans the full development lifecycle, from designing DynamoDB data architectures and implementing multi-region active-active systems to building sophisticated media asset management platforms. I have extensive experience with Vue.js ecosystem, TypeScript, and AWS serverless technologies including Lambda, API Gateway, and CloudFront.",
+    "Beyond individual contributions, I actively mentor and train engineers, having conducted training sessions for 20+ developers on serverless architecture and AWS best practices. I'm passionate about building resilient systems, optimizing performance, and delivering exceptional user experiences."
+  ],
+  "skills": {
+    "frontend": {
+      "title": "Frontend",
+      "technologies": ["Vue.js", "TypeScript", "JavaScript", "Vuetify", "Nuxt.js"]
+    },
+    "backend": {
+      "title": "Backend & Cloud",
+      "technologies": ["Node.js", "AWS", "Lambda", "API Gateway", "DynamoDB", "S3", "CloudFront", "Serverless Framework"]
+    },
+    "devops": {
+      "title": "DevOps & Tools",
+      "technologies": ["CodePipeline", "CodeBuild", "GitHub Actions", "Step Functions", "IAM", "Lambda@Edge", "ACM"]
+    },
+    "previous": {
+      "title": "Previous Experience",
+      "technologies": ["Laravel", "PHP", "Express.js", "MySQL", "Prismic CMS", "REST APIs"]
+    }
+  },
+  "expertise": [
+    "Distributed data modeling and architecture with Amazon services",
+    "Serverless application development and optimization",
+    "Media asset management and processing systems",
+    "CI/CD pipeline design and automation",
+    "DynamoDB data modeling and performance optimization",
+    "Team mentorship and technical training"
+  ]
+}

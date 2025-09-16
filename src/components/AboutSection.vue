@@ -1,5 +1,23 @@
 <script setup lang="ts">
-// About section with detailed background and skills
+import { ref, onMounted } from 'vue';
+import { aboutService, type AboutData } from '@/services/aboutService';
+
+// Reactive data
+const aboutData = ref<AboutData | null>(null);
+const loading = ref(true);
+const error = ref<string | null>(null);
+
+// Load about data on component mount
+onMounted(async () => {
+  try {
+    aboutData.value = await aboutService.getAboutData();
+  } catch (err) {
+    error.value = 'Failed to load about information';
+    console.error('Error loading about data:', err);
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -8,114 +26,60 @@
       <div class="about-content">
         <h2 class="section-title">About</h2>
         
-        <div class="about-text">
-          <p>
-            I'm a Senior Software Development Engineer with years of experience 
-            specializing in cloud-native applications, serverless architecture, and modern 
-            web development. Currently at Craftsmen, I architect and build scalable systems 
-            using AWS services, focusing on multi-region deployments and high-availability solutions.
-          </p>
-          
-          <p>
-            My expertise spans the full development lifecycle, from designing DynamoDB data 
-            architectures and implementing multi-region active-active systems to building 
-            sophisticated media asset management platforms. I have extensive experience with 
-            Vue.js ecosystem, TypeScript, and AWS serverless technologies including Lambda, 
-            API Gateway, and CloudFront.
-          </p>
-
-          <p>
-            Beyond individual contributions, I actively mentor and train engineers, having 
-            conducted training sessions for 20+ developers on serverless architecture and 
-            AWS best practices. I'm passionate about building resilient systems, optimizing 
-            performance, and delivering exceptional user experiences.
-          </p>
+        <!-- Loading state -->
+        <div v-if="loading" class="loading-state">
+          <p>Loading...</p>
         </div>
+        
+        <!-- Error state -->
+        <div v-else-if="error" class="error-state">
+          <p>{{ error }}</p>
+        </div>
+        
+        <!-- Content when data is loaded -->
+        <template v-else-if="aboutData">
+          <div class="about-text">
+            <p v-for="(paragraph, index) in aboutData.description" :key="index">
+              {{ paragraph }}
+            </p>
+          </div>
 
-        <div class="skills-section">
-          <h3 class="subsection-title">Core Technologies</h3>
-          <div class="skills-categories">
-            <div class="skill-category">
-              <h4 class="category-title">Frontend</h4>
-              <div class="skills-list">
-                <span class="skill-tag">Vue.js</span>
-                <span class="skill-tag">TypeScript</span>
-                <span class="skill-tag">JavaScript</span>
-                <span class="skill-tag">Vuetify</span>
-                <span class="skill-tag">Nuxt.js</span>
-              </div>
-            </div>
-
-            <div class="skill-category">
-              <h4 class="category-title">Backend & Cloud</h4>
-              <div class="skills-list">
-                <span class="skill-tag">Node.js</span>
-                <span class="skill-tag">AWS</span>
-                <span class="skill-tag">Lambda</span>
-                <span class="skill-tag">API Gateway</span>
-                <span class="skill-tag">DynamoDB</span>
-                <span class="skill-tag">S3</span>
-                <span class="skill-tag">CloudFront</span>
-                <span class="skill-tag">Serverless Framework</span>
-              </div>
-            </div>
-
-            <div class="skill-category">
-              <h4 class="category-title">DevOps & Tools</h4>
-              <div class="skills-list">
-                <span class="skill-tag">CodePipeline</span>
-                <span class="skill-tag">CodeBuild</span>
-                <span class="skill-tag">GitHub Actions</span>
-                <span class="skill-tag">Step Functions</span>
-                <span class="skill-tag">IAM</span>
-                <span class="skill-tag">Lambda@Edge</span>
-                <span class="skill-tag">ACM</span>
-              </div>
-            </div>
-
-            <div class="skill-category">
-              <h4 class="category-title">Previous Experience</h4>
-              <div class="skills-list">
-                <span class="skill-tag">Laravel</span>
-                <span class="skill-tag">PHP</span>
-                <span class="skill-tag">Express.js</span>
-                <span class="skill-tag">MySQL</span>
-                <span class="skill-tag">Prismic CMS</span>
-                <span class="skill-tag">REST APIs</span>
+          <div class="skills-section">
+            <h3 class="subsection-title">Core Technologies</h3>
+            <div class="skills-categories">
+              <div 
+                v-for="(skillCategory, category) in aboutData.skills" 
+                :key="category"
+                class="skill-category"
+              >
+                <h4 class="category-title">{{ skillCategory.title }}</h4>
+                <div class="skills-list">
+                  <span 
+                    v-for="tech in skillCategory.technologies" 
+                    :key="tech"
+                    class="skill-tag"
+                  >
+                    {{ tech }}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
-        </div>
 
-        <div class="expertise-section">
-          <h3 class="subsection-title">Areas of Expertise</h3>
-          <div class="expertise-list">
-            <div class="expertise-item">
-              <span class="expertise-arrow">❯</span>
-              <span class="expertise-text">Distributed data modeling and architecture with Amazon services</span>
-            </div>
-            <div class="expertise-item">
-              <span class="expertise-arrow">❯</span>
-              <span class="expertise-text">Serverless application development and optimization</span>
-            </div>
-            <div class="expertise-item">
-              <span class="expertise-arrow">❯</span>
-              <span class="expertise-text">Media asset management and processing systems</span>
-            </div>
-            <div class="expertise-item">
-              <span class="expertise-arrow">❯</span>
-              <span class="expertise-text">CI/CD pipeline design and automation</span>
-            </div>
-            <div class="expertise-item">
-              <span class="expertise-arrow">❯</span>
-              <span class="expertise-text">DynamoDB data modeling and performance optimization</span>
-            </div>
-            <div class="expertise-item">
-              <span class="expertise-arrow">❯</span>
-              <span class="expertise-text">Team mentorship and technical training</span>
+          <div class="expertise-section">
+            <h3 class="subsection-title">Areas of Expertise</h3>
+            <div class="expertise-list">
+              <div 
+                v-for="(expertise, index) in aboutData.expertise" 
+                :key="index"
+                class="expertise-item"
+              >
+                <span class="expertise-arrow">❯</span>
+                <span class="expertise-text">{{ expertise }}</span>
+              </div>
             </div>
           </div>
-        </div>
+        </template>
       </div>
     </div>
   </section>
@@ -250,6 +214,17 @@
   line-height: 1.5;
   flex: 1;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: rgb(var(--v-theme-secondary));
+}
+
+.error-state {
+  color: rgb(var(--v-theme-error));
 }
 
 /* Responsive adjustments */
