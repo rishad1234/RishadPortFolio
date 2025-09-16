@@ -1,3 +1,5 @@
+import contactData from '@/data/contact.json';
+
 export interface SocialLink {
   name: string;
   url: string;
@@ -27,58 +29,43 @@ export interface ContactData {
 }
 
 class ContactService {
-  private contactData: ContactData | null = null;
+  private data: ContactData = contactData as ContactData;
 
-  async getContactData(): Promise<ContactData> {
-    if (!this.contactData) {
-      const response = await fetch('/src/data/contact.json');
-      if (!response.ok) {
-        throw new Error('Failed to load contact data');
-      }
-      this.contactData = await response.json();
-    }
-    return this.contactData!;
+  getContactData(): ContactData {
+    return this.data;
   }
 
-  async getDescription(): Promise<string[]> {
-    const data = await this.getContactData();
-    return data.description;
+  getDescription(): string[] {
+    return this.data.description;
   }
 
-  async getContactInfo(): Promise<ContactData['contactInfo']> {
-    const data = await this.getContactData();
-    return data.contactInfo;
+  getContactInfo(): ContactData['contactInfo'] {
+    return this.data.contactInfo;
   }
 
-  async getSocialLinks(): Promise<SocialLink[]> {
-    const data = await this.getContactData();
-    return data.socialLinks;
+  getSocialLinks(): SocialLink[] {
+    return this.data.socialLinks;
   }
 
-  async getOpportunityAreas(): Promise<string[]> {
-    const data = await this.getContactData();
-    return data.opportunityAreas;
+  getOpportunityAreas(): string[] {
+    return this.data.opportunityAreas;
   }
 
-  async getFooter(): Promise<ContactData['footer']> {
-    const data = await this.getContactData();
-    return data.footer;
+  getFooter(): ContactData['footer'] {
+    return this.data.footer;
   }
 
   // Helper methods for specific contact info
-  async getEmail(): Promise<string> {
-    const contactInfo = await this.getContactInfo();
-    return contactInfo.email;
+  getEmail(): string {
+    return this.data.contactInfo.email;
   }
 
-  async getLocation(): Promise<string> {
-    const contactInfo = await this.getContactInfo();
-    return contactInfo.location;
+  getLocation(): string {
+    return this.data.contactInfo.location;
   }
 
-  async getCompany(): Promise<string> {
-    const contactInfo = await this.getContactInfo();
-    return contactInfo.company;
+  getCompany(): string {
+    return this.data.contactInfo.company;
   }
 }
 

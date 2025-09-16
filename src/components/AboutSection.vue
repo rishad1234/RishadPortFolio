@@ -8,9 +8,9 @@ const loading = ref(true);
 const error = ref<string | null>(null);
 
 // Load about data on component mount
-onMounted(async () => {
+onMounted(() => {
   try {
-    aboutData.value = await aboutService.getAboutData();
+    aboutData.value = aboutService.getAboutData();
   } catch (err) {
     error.value = 'Failed to load about information';
     console.error('Error loading about data:', err);

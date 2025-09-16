@@ -1,3 +1,5 @@
+import aboutData from '@/data/about.json';
+
 export interface AboutData {
   description: string[];
   skills: {
@@ -10,37 +12,27 @@ export interface AboutData {
 }
 
 class AboutService {
-  private aboutData: AboutData | null = null;
+  private data: AboutData = aboutData as AboutData;
 
-  async getAboutData(): Promise<AboutData> {
-    if (!this.aboutData) {
-      const response = await fetch('/src/data/about.json');
-      if (!response.ok) {
-        throw new Error('Failed to load about data');
-      }
-      this.aboutData = await response.json();
-    }
-    return this.aboutData!;
+  getAboutData(): AboutData {
+    return this.data;
   }
 
-  async getDescription(): Promise<string[]> {
-    const data = await this.getAboutData();
-    return data.description;
+  getDescription(): string[] {
+    return this.data.description;
   }
 
-  async getSkills(): Promise<AboutData['skills']> {
-    const data = await this.getAboutData();
-    return data.skills;
+  getSkills(): AboutData['skills'] {
+    return this.data.skills;
   }
 
-  async getExpertise(): Promise<string[]> {
-    const data = await this.getAboutData();
-    return data.expertise;
+  getExpertise(): string[] {
+    return this.data.expertise;
   }
 
   // Helper method to get skills as an array for easier rendering
-  async getSkillsArray(): Promise<Array<{ category: string; title: string; technologies: string[] }>> {
-    const skills = await this.getSkills();
+  getSkillsArray(): Array<{ category: string; title: string; technologies: string[] }> {
+    const skills = this.getSkills();
     return Object.entries(skills).map(([category, data]) => ({
       category,
       ...data

@@ -1,3 +1,5 @@
+import portfolioData from '@/data/portfolio.json';
+
 export interface Project {
   id: number;
   title: string;
@@ -41,70 +43,59 @@ export interface PortfolioData {
 }
 
 class PortfolioService {
-  private portfolioData: PortfolioData | null = null;
+  private data: PortfolioData = portfolioData as PortfolioData;
 
-  async getPortfolioData(): Promise<PortfolioData> {
-    if (!this.portfolioData) {
-      const response = await fetch('/src/data/portfolio.json');
-      if (!response.ok) {
-        throw new Error('Failed to load portfolio data');
-      }
-      this.portfolioData = await response.json();
-    }
-    return this.portfolioData!;
+  getPortfolioData(): PortfolioData {
+    return this.data;
   }
 
-  async getProjects(): Promise<Project[]> {
-    const data = await this.getPortfolioData();
-    return data.projects;
+  getProjects(): Project[] {
+    return this.data.projects;
   }
 
-  async getGitHubInfo(): Promise<GitHubInfo> {
-    const data = await this.getPortfolioData();
-    return data.githubInfo;
+  getGitHubInfo(): GitHubInfo {
+    return this.data.githubInfo;
   }
 
-  async getCategories(): Promise<Category[]> {
-    const data = await this.getPortfolioData();
-    return data.categories;
+  getCategories(): Category[] {
+    return this.data.categories;
   }
 
-  async getStats(): Promise<PortfolioStats> {
-    const data = await this.getPortfolioData();
-    return data.stats;
+  getStats(): PortfolioStats {
+    return this.data.stats;
   }
 
   // Helper methods for filtering projects
-  async getFeaturedProjects(): Promise<Project[]> {
-    const projects = await this.getProjects();
+  getFeaturedProjects(): Project[] {
+    const projects = this.getProjects();
     return projects.filter(project => project.featured);
   }
 
-  async getProjectsByCategory(category: string): Promise<Project[]> {
-    const projects = await this.getProjects();
+  getProjectsByCategory(category: string): Project[] {
+    const projects = this.getProjects();
     if (category === 'all') {
       return projects;
     }
     return projects.filter(project => project.category === category);
   }
 
-  async getProjectsByYear(year: string): Promise<Project[]> {
-    const projects = await this.getProjects();
+  getProjectsByYear(year: string): Project[] {
+    const projects = this.getProjects();
     return projects.filter(project => project.year === year);
   }
 
-  async getProjectsByStatus(status: Project['status']): Promise<Project[]> {
-    const projects = await this.getProjects();
+  getProjectsByStatus(status: Project['status']): Project[] {
+    const projects = this.getProjects();
     return projects.filter(project => project.status === status);
   }
 
-  async getProjectById(id: number): Promise<Project | null> {
-    const projects = await this.getProjects();
+  getProjectById(id: number): Project | null {
+    const projects = this.getProjects();
     return projects.find(project => project.id === id) || null;
   }
 
-  async getProjectsByTechnology(technology: string): Promise<Project[]> {
-    const projects = await this.getProjects();
+  getProjectsByTechnology(technology: string): Project[] {
+    const projects = this.getProjects();
     return projects.filter(project => 
       project.technologies.some(tech => 
         tech.toLowerCase().includes(technology.toLowerCase())
@@ -113,22 +104,22 @@ class PortfolioService {
   }
 
   // Helper to get all unique technologies
-  async getAllTechnologies(): Promise<string[]> {
-    const projects = await this.getProjects();
+  getAllTechnologies(): string[] {
+    const projects = this.getProjects();
     const allTechs = projects.flatMap(project => project.technologies);
     return [...new Set(allTechs)].sort();
   }
 
   // Helper to get all unique years
-  async getAllYears(): Promise<string[]> {
-    const projects = await this.getProjects();
+  getAllYears(): string[] {
+    const projects = this.getProjects();
     const allYears = projects.map(project => project.year);
     return [...new Set(allYears)].sort().reverse(); // Most recent first
   }
 
   // Helper to get projects sorted by various criteria
-  async getProjectsSorted(sortBy: 'year' | 'stars' | 'title' = 'year'): Promise<Project[]> {
-    const projects = await this.getProjects();
+  getProjectsSorted(sortBy: 'year' | 'stars' | 'title' = 'year'): Project[] {
+    const projects = this.getProjects();
     return [...projects].sort((a, b) => {
       switch (sortBy) {
         case 'year':

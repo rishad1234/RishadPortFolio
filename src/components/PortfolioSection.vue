@@ -8,9 +8,9 @@ const loading = ref(true);
 const error = ref<string | null>(null);
 
 // Load portfolio data on component mount
-onMounted(async () => {
+onMounted(() => {
   try {
-    portfolioData.value = await portfolioService.getPortfolioData();
+    portfolioData.value = portfolioService.getPortfolioData();
   } catch (err) {
     error.value = 'Failed to load portfolio information';
     console.error('Error loading portfolio data:', err);

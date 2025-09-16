@@ -8,9 +8,9 @@ const loading = ref(true);
 const error = ref<string | null>(null);
 
 // Load experience data on component mount
-onMounted(async () => {
+onMounted(() => {
   try {
-    experienceData.value = await experienceService.getExperienceData();
+    experienceData.value = experienceService.getExperienceData();
   } catch (err) {
     error.value = 'Failed to load experience information';
     console.error('Error loading experience data:', err);

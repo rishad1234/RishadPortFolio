@@ -1,3 +1,5 @@
+import experienceData from '@/data/experience.json';
+
 export interface Experience {
   id: number;
   title: string;
@@ -23,65 +25,55 @@ export interface ExperienceData {
 }
 
 class ExperienceService {
-  private experienceData: ExperienceData | null = null;
+  private data: ExperienceData = experienceData as ExperienceData;
 
-  async getExperienceData(): Promise<ExperienceData> {
-    if (!this.experienceData) {
-      const response = await fetch('/src/data/experience.json');
-      if (!response.ok) {
-        throw new Error('Failed to load experience data');
-      }
-      this.experienceData = await response.json();
-    }
-    return this.experienceData!;
+  getExperienceData(): ExperienceData {
+    return this.data;
   }
 
-  async getDescription(): Promise<string[]> {
-    const data = await this.getExperienceData();
-    return data.description || [];
+  getDescription(): string[] {
+    return this.data.description || [];
   }
 
-  async getExperiences(): Promise<Experience[]> {
-    const data = await this.getExperienceData();
-    return data.experiences;
+  getExperiences(): Experience[] {
+    return this.data.experiences;
   }
 
-  async getSummary(): Promise<ExperienceSummary> {
-    const data = await this.getExperienceData();
-    return data.summary;
+  getSummary(): ExperienceSummary {
+    return this.data.summary;
   }
 
   // Helper methods for filtering experiences
-  async getCurrentExperience(): Promise<Experience | null> {
-    const experiences = await this.getExperiences();
+  getCurrentExperience(): Experience | null {
+    const experiences = this.getExperiences();
     return experiences.find(exp => exp.type === 'current') || null;
   }
 
-  async getPreviousExperiences(): Promise<Experience[]> {
-    const experiences = await this.getExperiences();
+  getPreviousExperiences(): Experience[] {
+    const experiences = this.getExperiences();
     return experiences.filter(exp => exp.type === 'previous');
   }
 
-  async getExperienceById(id: number): Promise<Experience | null> {
-    const experiences = await this.getExperiences();
+  getExperienceById(id: number): Experience | null {
+    const experiences = this.getExperiences();
     return experiences.find(exp => exp.id === id) || null;
   }
 
-  async getExperiencesByCompany(company: string): Promise<Experience[]> {
-    const experiences = await this.getExperiences();
+  getExperiencesByCompany(company: string): Experience[] {
+    const experiences = this.getExperiences();
     return experiences.filter(exp => exp.company.toLowerCase() === company.toLowerCase());
   }
 
   // Helper to get all technologies used across experiences
-  async getAllTechnologies(): Promise<string[]> {
-    const experiences = await this.getExperiences();
+  getAllTechnologies(): string[] {
+    const experiences = this.getExperiences();
     const allTechs = experiences.flatMap(exp => exp.technologies);
     return [...new Set(allTechs)]; // Remove duplicates
   }
 
   // Helper to get experiences sorted by chronological order (newest first)
-  async getExperiencesChronological(): Promise<Experience[]> {
-    const experiences = await this.getExperiences();
+  getExperiencesChronological(): Experience[] {
+    const experiences = this.getExperiences();
     return experiences.sort((a, b) => {
       // Current experiences first, then by id (assuming higher id = more recent)
       if (a.type === 'current' && b.type !== 'current') return -1;

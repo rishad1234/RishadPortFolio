@@ -8,9 +8,9 @@ const loading = ref(true);
 const error = ref<string | null>(null);
 
 // Load contact data on component mount
-onMounted(async () => {
+onMounted(() => {
   try {
-    contactData.value = await contactService.getContactData();
+    contactData.value = contactService.getContactData();
   } catch (err) {
     error.value = 'Failed to load contact information';
     console.error('Error loading contact data:', err);
