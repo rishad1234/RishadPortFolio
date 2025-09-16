@@ -1,0 +1,58 @@
+{
+  "description": [
+    "I'm always interested in discussing new opportunities, challenging projects, and innovative solutions in cloud architecture and full-stack development. Whether you have a question about AWS serverless systems, want to collaborate on a project, or just want to connect, feel free to reach out!"
+  ],
+  "contactInfo": {
+    "email": "rishadulislam@outlook.com",
+    "location": "Dhaka, Bangladesh",
+    "company": "Craftsmen (Software Development Engineer II)"
+  },
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/rishad1234",
+      "icon": "mdi-github",
+      "external": true
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/rishadul-islam-khan-47931a14b",
+      "icon": "mdi-linkedin",
+      "external": true
+    },
+    {
+      "name": "Twitter",
+      "url": "https://x.com/RishadulIslam6",
+      "icon": "mdi-twitter",
+      "external": true
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/rishadulislamkhan/",
+      "icon": "mdi-facebook",
+      "external": true
+    },
+    {
+      "name": "Email",
+      "url": "mailto:rishadulislam@outlook.com",
+      "icon": "mdi-email",
+      "external": false
+    }
+  ],
+  "opportunityAreas": [
+    "AWS Cloud Architecture",
+    "Serverless Development",
+    "Vue.js & TypeScript",
+    "Full-stack Development",
+    "Team Leadership",
+    "Technical Mentoring"
+  ],
+  "footer": {
+    "text": "Built with Vue.js + Vuetify + TypeScript",
+    "sourceLink": {
+      "text": "View Source",
+      "url": "https://github.com/rishad1234/RishadPortFolio",
+      "icon": "mdi-open-in-new"
+    }
+  }
+}

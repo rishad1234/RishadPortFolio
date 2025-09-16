@@ -1,5 +1,23 @@
 <script setup lang="ts">
-// Contact section with real information and social links
+import { ref, onMounted } from 'vue';
+import { contactService, type ContactData } from '@/services/contactService';
+
+// Reactive data
+const contactData = ref<ContactData | null>(null);
+const loading = ref(true);
+const error = ref<string | null>(null);
+
+// Load contact data on component mount
+onMounted(async () => {
+  try {
+    contactData.value = await contactService.getContactData();
+  } catch (err) {
+    error.value = 'Failed to load contact information';
+    console.error('Error loading contact data:', err);
+  } finally {
+    loading.value = false;
+  }
+});
 </script>
 
 <template>
@@ -8,112 +26,91 @@
       <div class="contact-content">
         <h2 class="section-title">Contact</h2>
         
-        <div class="contact-text">
-          <p>
-            I'm always interested in discussing new opportunities, challenging projects, 
-            and innovative solutions in cloud architecture and full-stack development. 
-            Whether you have a question about AWS serverless systems, want to collaborate 
-            on a project, or just want to connect, feel free to reach out!
-          </p>
+        <!-- Loading state -->
+        <div v-if="loading" class="loading-state">
+          <p>Loading...</p>
         </div>
-
-        <div class="contact-links">
-          <div class="contact-item">
-            <span class="contact-label">Email:</span>
-            <a 
-              href="mailto:rishadulislam@outlook.com" 
-              class="contact-link"
-            >
-              rishadulislam@outlook.com
-            </a>
-          </div>
-          
-          <div class="contact-item">
-            <span class="contact-label">Location:</span>
-            <span class="contact-value">Dhaka, Bangladesh</span>
+        
+        <!-- Error state -->
+        <div v-else-if="error" class="error-state">
+          <p>{{ error }}</p>
+        </div>
+        
+        <!-- Content when data is loaded -->
+        <template v-else-if="contactData">
+          <div class="contact-text">
+            <p v-for="(paragraph, index) in contactData.description" :key="index">
+              {{ paragraph }}
+            </p>
           </div>
 
-          <div class="contact-item">
-            <span class="contact-label">Company:</span>
-            <span class="contact-value">Craftsmen (Software Development Engineer II)</span>
-          </div>
-        </div>
+          <div class="contact-links">
+            <div class="contact-item">
+              <span class="contact-label">Email:</span>
+              <a 
+                :href="`mailto:${contactData.contactInfo.email}`" 
+                class="contact-link"
+              >
+                {{ contactData.contactInfo.email }}
+              </a>
+            </div>
+            
+            <div class="contact-item">
+              <span class="contact-label">Location:</span>
+              <span class="contact-value">{{ contactData.contactInfo.location }}</span>
+            </div>
 
-        <div class="social-section">
-          <h3 class="subsection-title">Connect</h3>
-          <div class="social-links">
-            <a 
-              href="https://github.com/rishad1234" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="social-link"
-            >
-              <v-icon size="small">mdi-github</v-icon>
-              GitHub
-            </a>
-            <a 
-              href="https://www.linkedin.com/in/rishadul-islam-khan-47931a14b" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="social-link"
-            >
-              <v-icon size="small">mdi-linkedin</v-icon>
-              LinkedIn
-            </a>
-            <a 
-              href="https://x.com/RishadulIslam6" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="social-link"
-            >
-              <v-icon size="small">mdi-twitter</v-icon>
-              Twitter
-            </a>
-            <a 
-              href="https://www.facebook.com/rishadulislamkhan/" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="social-link"
-            >
-              <v-icon size="small">mdi-facebook</v-icon>
-              Facebook
-            </a>
-            <a 
-              href="mailto:rishadulislam@outlook.com" 
-              class="social-link"
-            >
-              <v-icon size="small">mdi-email</v-icon>
-              Email
-            </a>
+            <div class="contact-item">
+              <span class="contact-label">Company:</span>
+              <span class="contact-value">{{ contactData.contactInfo.company }}</span>
+            </div>
           </div>
-        </div>
 
-        <div class="expertise-highlight">
-          <h3 class="subsection-title">Open to Opportunities</h3>
-          <div class="opportunity-tags">
-            <span class="opportunity-tag">AWS Cloud Architecture</span>
-            <span class="opportunity-tag">Serverless Development</span>
-            <span class="opportunity-tag">Vue.js & TypeScript</span>
-            <span class="opportunity-tag">Full-stack Development</span>
-            <span class="opportunity-tag">Team Leadership</span>
-            <span class="opportunity-tag">Technical Mentoring</span>
+          <div class="social-section">
+            <h3 class="subsection-title">Connect</h3>
+            <div class="social-links">
+              <a 
+                v-for="social in contactData.socialLinks"
+                :key="social.name"
+                :href="social.url" 
+                :target="social.external ? '_blank' : undefined"
+                :rel="social.external ? 'noopener noreferrer' : undefined"
+                class="social-link"
+              >
+                <v-icon size="small">{{ social.icon }}</v-icon>
+                {{ social.name }}
+              </a>
+            </div>
           </div>
-        </div>
 
-        <div class="footer-note">
-          <p>
-            Built with Vue.js + Vuetify + TypeScript • 
-            <a 
-              href="https://github.com/rishad1234/RishadPortFolio" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="source-link"
-            >
-              View Source
-              <v-icon size="small">mdi-open-in-new</v-icon>
-            </a>
-          </p>
-        </div>
+          <div class="expertise-highlight">
+            <h3 class="subsection-title">Open to Opportunities</h3>
+            <div class="opportunity-tags">
+              <span 
+                v-for="area in contactData.opportunityAreas"
+                :key="area"
+                class="opportunity-tag"
+              >
+                {{ area }}
+              </span>
+            </div>
+          </div>
+
+          <div class="footer-note">
+            <p>
+              {{ contactData.footer.text }} • 
+              <a 
+                :href="contactData.footer.sourceLink.url" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="source-link"
+              >
+                {{ contactData.footer.sourceLink.text }}
+                <v-icon size="small">{{ contactData.footer.sourceLink.icon }}</v-icon>
+              </a>
+            </p>
+          </div>
+        </template>
       </div>
     </div>
   </section>
@@ -156,6 +153,17 @@
   color: rgb(var(--v-theme-secondary));
   font-size: 1.1rem;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: rgb(var(--v-theme-secondary));
+}
+
+.error-state {
+  color: rgb(var(--v-theme-error));
 }
 
 .contact-links {
