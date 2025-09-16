@@ -1,0 +1,108 @@
+{
+  "projects": [
+    {
+      "id": 1,
+      "title": "Collab",
+      "description": "A collaborative platform connecting professors and students based on shared interests. Features individual profiles, organized news feeds, and communication tools built with Laravel, Vue.js, and real-time messaging.",
+      "technologies": ["Laravel", "PHP", "Vue.js", "MySQL", "Pusher", "Blade"],
+      "github": "https://github.com/rishad1234/Collab",
+      "demo": null,
+      "year": "2020",
+      "stars": 3,
+      "forks": 1,
+      "featured": true,
+      "category": "web",
+      "status": "completed"
+    },
+    {
+      "id": 2,
+      "title": "DiveinPlayer",
+      "description": "A complete JavaFX-based media player built from scratch without external libraries. Features automatic file discovery, playlist management, and supports both music and video playback.",
+      "technologies": ["Java", "JavaFX", "HTML", "CSS"],
+      "github": "https://github.com/rishad1234/DiveinPlayer",
+      "demo": null,
+      "year": "2020",
+      "stars": 0,
+      "forks": 0,
+      "featured": true,
+      "category": "desktop",
+      "status": "completed"
+    },
+    {
+      "id": 3,
+      "title": "SpaceWar",
+      "description": "A classic space shooting game inspired by NES-style arcade games. Features 4 levels, scoring system, and fast-paced gameplay developed using C/C++ and iGraphics.",
+      "technologies": ["C", "C++", "iGraphics"],
+      "github": "https://github.com/rishad1234/SpaceWar",
+      "demo": null,
+      "year": "2019",
+      "stars": 0,
+      "forks": 0,
+      "featured": false,
+      "category": "game",
+      "status": "completed"
+    },
+    {
+      "id": 4,
+      "title": "Inspect",
+      "description": "An online tech news platform with customizable content management. Built with a custom PHP framework to control HTML, CSS, and assets for dynamic content delivery.",
+      "technologies": ["PHP", "JavaScript", "CSS", "HTML"],
+      "github": "https://github.com/rishad1234/inspect",
+      "demo": null,
+      "year": "2019",
+      "stars": 0,
+      "forks": 0,
+      "featured": false,
+      "category": "web",
+      "status": "completed"
+    },
+    {
+      "id": 5,
+      "title": "Pong",
+      "description": "Classic Pong game implementation developed in C/C++. A simple yet engaging recreation of the iconic arcade game with smooth gameplay mechanics.",
+      "technologies": ["C", "C++"],
+      "github": "https://github.com/rishad1234/Pong",
+      "demo": null,
+      "year": "2019",
+      "stars": 0,
+      "forks": 0,
+      "featured": false,
+      "category": "game",
+      "status": "completed"
+    }
+  ],
+  "githubInfo": {
+    "username": "rishad1234",
+    "profileUrl": "https://github.com/rishad1234",
+    "moreProjectsText": "View more projects on my GitHub"
+  },
+  "categories": [
+    {
+      "id": "all",
+      "name": "All Projects",
+      "description": "All available projects"
+    },
+    {
+      "id": "web",
+      "name": "Web Development",
+      "description": "Full-stack web applications and platforms"
+    },
+    {
+      "id": "desktop",
+      "name": "Desktop Applications",
+      "description": "Native desktop applications"
+    },
+    {
+      "id": "game",
+      "name": "Game Development",
+      "description": "Games and interactive applications"
+    }
+  ],
+  "stats": {
+    "totalProjects": 5,
+    "featuredProjects": 2,
+    "totalStars": 3,
+    "totalForks": 1,
+    "languages": ["Laravel", "PHP", "Vue.js", "Java", "C", "C++", "JavaScript"]
+  }
+}

@@ -1,63 +1,23 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue';
+import { portfolioService, type PortfolioData } from '@/services/portfolioService';
 
-const projects = ref([
-  {
-    id: 1,
-    title: 'Collab',
-    description: 'A collaborative platform connecting professors and students based on shared interests. Features individual profiles, organized news feeds, and communication tools built with Laravel, Vue.js, and real-time messaging.',
-    technologies: ['Laravel', 'PHP', 'Vue.js', 'MySQL', 'Pusher', 'Blade'],
-    github: 'https://github.com/rishad1234/Collab',
-    demo: null,
-    year: '2020',
-    stars: 3,
-    forks: 1
-  },
-  {
-    id: 2,
-    title: 'DiveinPlayer',
-    description: 'A complete JavaFX-based media player built from scratch without external libraries. Features automatic file discovery, playlist management, and supports both music and video playback.',
-    technologies: ['Java', 'JavaFX', 'HTML', 'CSS'],
-    github: 'https://github.com/rishad1234/DiveinPlayer',
-    demo: null,
-    year: '2020',
-    stars: 0,
-    forks: 0
-  },
-  {
-    id: 3,
-    title: 'SpaceWar',
-    description: 'A classic space shooting game inspired by NES-style arcade games. Features 4 levels, scoring system, and fast-paced gameplay developed using C/C++ and iGraphics.',
-    technologies: ['C', 'C++', 'iGraphics'],
-    github: 'https://github.com/rishad1234/SpaceWar',
-    demo: null,
-    year: '2019',
-    stars: 0,
-    forks: 0
-  },
-  {
-    id: 4,
-    title: 'Inspect',
-    description: 'An online tech news platform with customizable content management. Built with a custom PHP framework to control HTML, CSS, and assets for dynamic content delivery.',
-    technologies: ['PHP', 'JavaScript', 'CSS', 'HTML'],
-    github: 'https://github.com/rishad1234/inspect',
-    demo: null,
-    year: '2019',
-    stars: 0,
-    forks: 0
-  },
-  {
-    id: 5,
-    title: 'Pong',
-    description: 'Classic Pong game implementation developed in C/C++. A simple yet engaging recreation of the iconic arcade game with smooth gameplay mechanics.',
-    technologies: ['C', 'C++'],
-    github: 'https://github.com/rishad1234/Pong',
-    demo: null,
-    year: '2019',
-    stars: 0,
-    forks: 0
+// Reactive data
+const portfolioData = ref<PortfolioData | null>(null);
+const loading = ref(true);
+const error = ref<string | null>(null);
+
+// Load portfolio data on component mount
+onMounted(async () => {
+  try {
+    portfolioData.value = await portfolioService.getPortfolioData();
+  } catch (err) {
+    error.value = 'Failed to load portfolio information';
+    console.error('Error loading portfolio data:', err);
+  } finally {
+    loading.value = false;
   }
-])
+});
 </script>
 
 <template>
@@ -66,97 +26,119 @@ const projects = ref([
       <div class="projects-content">
         <h2 class="section-title">Projects</h2>
         
-        <div class="projects-list">
-          <div 
-            v-for="project in projects" 
-            :key="project.id" 
-            class="project-item"
-          >
-            <div class="project-header">
-              <h3 class="project-title">
-                <a 
-                  v-if="project.demo"
-                  :href="project.demo" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="project-link"
-                >
-                  {{ project.title }}
-                  <v-icon size="small" class="external-link-icon">mdi-open-in-new</v-icon>
-                </a>
-                <span v-else class="project-title-text">
-                  {{ project.title }}
-                </span>
-              </h3>
-              <div class="project-meta">
-                <span class="project-year">{{ project.year }}</span>
-                <div v-if="project.stars !== undefined || project.forks !== undefined" class="project-stats">
-                  <span v-if="project.stars !== undefined" class="stat-item">
-                    <v-icon size="small">mdi-star-outline</v-icon>
-                    {{ project.stars }}
+        <!-- Loading state -->
+        <div v-if="loading" class="loading-state">
+          <p>Loading...</p>
+        </div>
+        
+        <!-- Error state -->
+        <div v-else-if="error" class="error-state">
+          <p>{{ error }}</p>
+        </div>
+
+        <!-- Content when data is loaded -->
+        <template v-else-if="portfolioData">
+          <div class="projects-list">
+            <div 
+              v-for="project in portfolioData.projects" 
+              :key="project.id" 
+              class="project-item"
+            >
+              <div class="project-header">
+                <h3 class="project-title">
+                  <a 
+                    v-if="project.demo"
+                    :href="project.demo" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="project-link"
+                  >
+                    {{ project.title }}
+                    <v-icon size="small" class="external-link-icon">mdi-open-in-new</v-icon>
+                  </a>
+                  <span v-else class="project-title-text">
+                    {{ project.title }}
+                    <v-chip 
+                      v-if="project.featured" 
+                      size="x-small" 
+                      color="primary" 
+                      variant="outlined"
+                      class="ml-2"
+                    >
+                      Featured
+                    </v-chip>
                   </span>
-                  <span v-if="project.forks !== undefined" class="stat-item">
-                    <v-icon size="small">mdi-source-fork</v-icon>
-                    {{ project.forks }}
+                </h3>
+                <div class="project-meta">
+                  <span class="project-year">{{ project.year }}</span>
+                  <div v-if="project.stars !== undefined || project.forks !== undefined" class="project-stats">
+                    <span v-if="project.stars !== undefined" class="stat-item">
+                      <v-icon size="small">mdi-star-outline</v-icon>
+                      {{ project.stars }}
+                    </span>
+                    <span v-if="project.forks !== undefined" class="stat-item">
+                      <v-icon size="small">mdi-source-fork</v-icon>
+                      {{ project.forks }}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <p class="project-description">
+                {{ project.description }}
+              </p>
+              
+              <div class="project-footer">
+                <div class="project-technologies">
+                  <span 
+                    v-for="tech in project.technologies" 
+                    :key="tech" 
+                    class="tech-tag"
+                  >
+                    {{ tech }}
                   </span>
+                </div>
+                
+                <div class="project-links">
+                  <a 
+                    :href="project.github" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="project-action"
+                  >
+                    <v-icon size="small">mdi-github</v-icon>
+                    Code
+                  </a>
+                  <a 
+                    v-if="project.demo"
+                    :href="project.demo" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    class="project-action"
+                  >
+                    <v-icon size="small">mdi-open-in-new</v-icon>
+                    Demo
+                  </a>
                 </div>
               </div>
             </div>
-            
-            <p class="project-description">
-              {{ project.description }}
-            </p>
-            
-            <div class="project-footer">
-              <div class="project-technologies">
-                <span 
-                  v-for="tech in project.technologies" 
-                  :key="tech" 
-                  class="tech-tag"
-                >
-                  {{ tech }}
-                </span>
-              </div>
-              
-              <div class="project-links">
-                <a 
-                  :href="project.github" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="project-action"
-                >
-                  <v-icon size="small">mdi-github</v-icon>
-                  Code
-                </a>
-                <a 
-                  v-if="project.demo"
-                  :href="project.demo" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  class="project-action"
-                >
-                  <v-icon size="small">mdi-open-in-new</v-icon>
-                  Demo
-                </a>
-              </div>
-            </div>
           </div>
-        </div>
 
-        <div class="more-projects">
-          <p class="more-text">
-            View more projects on my 
-            <a 
-              href="https://github.com/rishad1234" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              class="github-link"
-            >
-              GitHub
-              <v-icon size="small">mdi-open-in-new</v-icon>
-            </a>
-          </p>
-        </div>
+          <div class="more-projects">
+            <p class="more-text">
+              {{ portfolioData.githubInfo.moreProjectsText }} 
+              <a 
+                :href="portfolioData.githubInfo.profileUrl" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                class="github-link"
+              >
+                GitHub
+                <v-icon size="small">mdi-open-in-new</v-icon>
+              </a>
+            </p>
+          </div>
+        </template>
       </div>
     </div>
   </section>
@@ -188,6 +170,17 @@ const projects = ref([
   line-height: 1.2;
   letter-spacing: -0.02em;
   transition: color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.loading-state,
+.error-state {
+  text-align: center;
+  padding: 2rem;
+  color: rgb(var(--v-theme-secondary));
+}
+
+.error-state {
+  color: rgb(var(--v-theme-error));
 }
 
 .projects-list {
